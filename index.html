@@ -71,6 +71,11 @@
             margin-bottom: 20px;
         }
 
+        .nav-actions {
+            display: flex;
+            gap: 10px;
+        }
+
         .back-btn {
             display: none;
             background-color: #0284c7;
@@ -84,6 +89,20 @@
         }
 
         .back-btn:hover { background-color: #0369a1; }
+
+        .logout-btn {
+            display: none;
+            background-color: #e11d48;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover { background-color: #be123c; }
 
         .page-title {
             font-size: 20px;
@@ -301,9 +320,14 @@
         <!-- Navigation Header -->
         <div class="nav-bar">
             <h2 class="page-title" id="current-page-title">সদস্য সিকিউরিটি লগইন</h2>
-            <button class="back-btn" id="back-button" onclick="openPage('home-dashboard')">
-                <i class="fa-solid fa-arrow-left"></i> ড্যাশবোর্ডে ফিরে যান
-            </button>
+            <div class="nav-actions">
+                <button class="back-btn" id="back-button" onclick="openPage('home-dashboard')">
+                    <i class="fa-solid fa-arrow-left"></i> ড্যাশবোর্ডে ফিরে যান
+                </button>
+                <button class="logout-btn" id="logout-button" onclick="openPage('login-page')">
+                    <i class="fa-solid fa-right-from-bracket"></i> লগইন পেইজ
+                </button>
+            </div>
         </div>
 
         <!-- ================= 0. MEMBER LOGIN PAGE (WITH LIVE CALENDAR) ================= -->
@@ -599,7 +623,7 @@
     <footer>
       <div>
          <div>Dent Craft Lab — New Circular Road, Barishal Sadar, Barishal | Precision Dental Solutions </div>
-         <div>© 2026, Dent Craf  Lab</div>
+         <div>© 2026, Dent Craft Lab</div>
         <div>Developer: Abdul Awal, Dubai, UAE</div>
           </div>
     </footer>
@@ -685,16 +709,20 @@
             document.getElementById(pageId).classList.add('active');
 
             const backBtn = document.getElementById('back-button');
+            const logoutBtn = document.getElementById('logout-button');
             const pageTitle = document.getElementById('current-page-title');
 
             if (pageId === 'login-page') {
                 backBtn.style.display = 'none';
+                logoutBtn.style.display = 'none';
                 pageTitle.innerText = "সদস্য সিকিউরিটি লগইন";
             } else if (pageId === 'home-dashboard') {
                 backBtn.style.display = 'none';
+                logoutBtn.style.display = 'inline-block';
                 pageTitle.innerText = "মূল ড্যাশবোর্ড (Home Dashboard)";
             } else {
                 backBtn.style.display = 'inline-block';
+                logoutBtn.style.display = 'inline-block';
                 if (pageId === 'daily-ledger-page') pageTitle.innerText = "ডেইলি লেজার (Daily Income)";
                 else if (pageId === 'daily-expense-page') pageTitle.innerText = "ডেইলি এক্সপেন্স (Daily Expenses)";
                 else if (pageId === 'overview-page') pageTitle.innerText = "ল্যাব ওভারভিউ";
