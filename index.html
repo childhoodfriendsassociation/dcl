@@ -269,6 +269,28 @@
         .btn-red .card-icon-box { background: #ffe4e6; color: #e11d48; }
         .btn-teal .card-icon-box { background: #ccfbf1; color: #0d9488; }
 
+        /* Data Tables Header Bar */
+        .card-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .btn-print {
+            background-color: #475569;
+            color: #ffffff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-print:hover { background-color: #334155; }
+
         /* Data Tables */
         .data-card {
             background: #ffffff;
@@ -299,6 +321,36 @@
             border-top: 1px solid #e2e8f0;
             background: #ffffff;
             margin-top: auto;
+        }
+
+        /* Print Media Style */
+        @media print {
+            header, .nav-bar, footer, .btn-print {
+                display: none !important;
+            }
+            body {
+                background: white;
+                color: black;
+            }
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .view-panel {
+                display: none !important;
+            }
+            .view-panel.active {
+                display: block !important;
+            }
+            .data-card {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+            }
+            th, td {
+                border: 1px solid #cbd5e1;
+            }
         }
     </style>
 </head>
@@ -415,7 +467,10 @@
         <!-- ================= DAILY LEDGER PAGE ================= -->
         <div id="daily-ledger-page" class="view-panel">
             <div class="data-card">
-                <h3 style="margin-bottom: 16px; color: #0f172a;">দৈনিক আয় / লেজার খাতা (Daily Income Ledger)</h3>
+                <div class="card-header-bar">
+                    <h3 style="color: #0f172a;">দৈনিক আয় / লেজার খাতা (Daily Income Ledger)</h3>
+                    <button class="btn-print" onclick="window.print()"><i class="fa-solid fa-print"></i> প্রিন্ট</button>
+                </div>
                 <table>
                     <thead>
                         <tr>
@@ -450,7 +505,10 @@
         <!-- ================= DAILY EXPENSE PAGE ================= -->
         <div id="daily-expense-page" class="view-panel">
             <div class="data-card">
-                <h3 style="margin-bottom: 16px; color: #0f172a;">দৈনন্দিন খুচরা খরচ (Daily Expenses)</h3>
+                <div class="card-header-bar">
+                    <h3 style="color: #0f172a;">দৈনন্দিন খুচরা খরচ (Daily Expenses)</h3>
+                    <button class="btn-print" onclick="window.print()"><i class="fa-solid fa-print"></i> প্রিন্ট</button>
+                </div>
                 <table>
                     <thead>
                         <tr>
@@ -485,7 +543,10 @@
         <!-- ================= PAGE: OVERVIEW ================= -->
         <div id="overview-page" class="view-panel">
             <div class="data-card">
-                <h3 style="margin-bottom: 16px; color: #0f172a;">Dent Craft Lab - সার্বিক অর্থায়ন</h3>
+                <div class="card-header-bar">
+                    <h3 style="color: #0f172a;">Dent Craft Lab - সার্বিক অর্থায়ন</h3>
+                    <button class="btn-print" onclick="window.print()"><i class="fa-solid fa-print"></i> প্রিন্ট</button>
+                </div>
                 <table>
                     <thead>
                         <tr>
@@ -518,7 +579,10 @@
         <!-- ================= PAGE: MEMBERS LEDGER ================= -->
         <div id="members-page" class="view-panel">
             <div class="data-card">
-                <h3 style="margin-bottom: 16px; color: #0f172a;">ল্যাব শেয়ারহোল্ডার ও পার্টনার রেজিস্টার</h3>
+                <div class="card-header-bar">
+                    <h3 style="color: #0f172a;">ল্যাব শেয়ারহোল্ডার ও পার্টনার রেজিস্টার</h3>
+                    <button class="btn-print" onclick="window.print()"><i class="fa-solid fa-print"></i> প্রিন্ট</button>
+                </div>
                 <table>
                     <thead>
                         <tr>
@@ -559,7 +623,10 @@
         <!-- ================= PAGE: BANK & ASSETS ================= -->
         <div id="bank-page" class="view-panel">
             <div class="data-card">
-                <h3 style="margin-bottom: 12px; color: #0f172a;">ব্যাংক লেনদেন ও ডেন্টাল ইকুইপমেন্ট ক্রয়</h3>
+                <div class="card-header-bar">
+                    <h3 style="color: #0f172a;">ব্যাংক লেনদেন ও ডেন্টাল ইকুইপমেন্ট ক্রয়</h3>
+                    <button class="btn-print" onclick="window.print()"><i class="fa-solid fa-print"></i> প্রিন্ট</button>
+                </div>
                 <p style="margin-bottom: 12px; font-size: 13px; color: #475569;">
                     <strong>ব্যাংক অ্যাকাউন্ট:</strong> Dent Craft Lab Operations | <strong>ব্যাংক:</strong> Mutual Trust Bank
                 </p>
@@ -597,7 +664,10 @@
         <!-- ================= PAGE: PROFIT & LOSS ================= -->
         <div id="profit-page" class="view-panel">
             <div class="data-card">
-                <h3 style="margin-bottom: 16px; color: #0f172a;">Dent Craft Lab - নিট মুনাফা বিশ্লেষণ</h3>
+                <div class="card-header-bar">
+                    <h3 style="color: #0f172a;">Dent Craft Lab - নিট মুনাফা বিশ্লেষণ</h3>
+                    <button class="btn-print" onclick="window.print()"><i class="fa-solid fa-print"></i> প্রিন্ট</button>
+                </div>
                 <table>
                     <tbody>
                         <tr>
@@ -625,7 +695,7 @@
          <div>Dent Craft Lab — New Circular Road, Barishal Sadar, Barishal | Precision Dental Solutions </div>
          <div>© 2026, Dent Craft Lab</div>
         <div>Developer: Abdul Awal, Dubai, UAE</div>
-          </div>
+      </div>
     </footer>
 
     <!-- Live Clock & Calendar Logic -->
