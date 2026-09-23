@@ -521,4 +521,192 @@
                             <td class="text-center"><span class="badge badge-due">বাকি ২,০০০</span></td>
                         </tr>
                         <tr>
-                            <td>M
+                            <td>Maria</td>
+                            <td>১টি</td>
+                            <td class="text-right">১০,০০০</td>
+                            <td class="text-right">০</td>
+                            <td class="text-center"><span class="badge badge-paid">পরিশোধিত</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ================= PAGE: BANK & ASSETS ================= -->
+        <div id="bank-page" class="view-panel">
+            <div class="data-card">
+                <h3 style="margin-bottom: 12px; color: #0f172a;">ব্যাংক লেনদেন ও ডেন্টাল ইকুইপমেন্ট ক্রয়</h3>
+                <p style="margin-bottom: 12px; font-size: 13px; color: #475569;">
+                    <strong>ব্যাংক অ্যাকাউন্ট:</strong> Dent Craft Lab Operations | <strong>ব্যাংক:</strong> Mutual Trust Bank
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>তারিখ</th>
+                            <th>বিবরণ / খাত</th>
+                            <th>পেমেন্ট মাধ্যম</th>
+                            <th class="text-right">পরিমাণ (৳)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>০৫/০৯/২০২৬</td>
+                            <td>ডেন্টাল মাইক্রোমোটর ও টুলস ক্রয়</td>
+                            <td>ব্যাংক ট্র্যান্সফার</td>
+                            <td class="text-right">৬০,০০০</td>
+                        </tr>
+                        <tr>
+                            <td>১০/০৯/২০২৬</td>
+                            <td>মেডিকেল গ্রেড ডেন্টাল সিরামিক ও রেজিন</td>
+                            <td>নগদ (Cash)</td>
+                            <td class="text-right">২৫,০০০</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="3" class="text-right">মোট খরচের পরিমাণ:</td>
+                            <td class="text-right">৳ ৮৫,০০০</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ================= PAGE: PROFIT & LOSS ================= -->
+        <div id="profit-page" class="view-panel">
+            <div class="data-card">
+                <h3 style="margin-bottom: 16px; color: #0f172a;">Dent Craft Lab - নিট মুনাফা বিশ্লেষণ</h3>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><strong>মোট সার্ভিস আয় (Lab Revenue)</strong></td>
+                            <td class="text-right" style="font-weight: bold; font-size: 15px;">৳ ২,৪৫,০০০</td>
+                        </tr>
+                        <tr>
+                            <td><strong>বাদ: পরিচালন ও ইকুইপমেন্ট খরচ (Operating Expenses)</strong></td>
+                            <td class="text-right" style="font-weight: bold; color: #dc2626; font-size: 15px;">(-) ৳ ৮৫,০০০</td>
+                        </tr>
+                        <tr class="total-row" style="font-size: 15px;">
+                            <td><strong>খুচরা নিট মুনাফা (Net Profit)</strong></td>
+                            <td class="text-right" style="font-weight: bold; color: #16a34a;">৳ ১,৬০,০০০</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div>
+         <div>Dent Craft Lab — New Circular Road, Barishal Sadar, Barishal | Precision Dental Solutions </div>
+         <div>© 2026, Dent Craf  Lab</div>
+        <div>Developer: Abdul Awal, Dubai, UAE</div>
+          </div>
+    </footer>
+
+    <!-- Live Clock & Calendar Logic -->
+    <script>
+        let lastRenderedDate = null;
+
+        // Function to update Live Clock & Render Calendar dynamically
+        function updateLiveClockAndCalendar() {
+            const now = new Date();
+
+            // 1. Live Clock Update (Bengali Numerals Format)
+            document.getElementById('current-time-text').innerHTML = `<i class="fa-regular fa-clock"></i> ${now.toLocaleTimeString('bn-BD')}`;
+
+            // 2. Calendar Auto-Refresh Logic (Checks if day or month changed)
+            const currentDateKey = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
+            if (lastRenderedDate !== currentDateKey) {
+                renderCalendar(now);
+                lastRenderedDate = currentDateKey;
+            }
+        }
+
+        // Render Calendar Grid
+        function renderCalendar(now) {
+            const year = now.getFullYear();
+            const month = now.getMonth();
+
+            const monthNames = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
+            const dayHeadings = ["রবি", "সোম", "মঙ্গল", "বুধ", "বৃহঃ", "শুক্র", "শনি"];
+
+            document.getElementById('calendar-month-year').innerText = `${monthNames[month]} ${year}`;
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            const container = document.getElementById('calendar-days-container');
+            container.innerHTML = '';
+
+            // Day Headers
+            dayHeadings.forEach(day => {
+                const dayHeadDiv = document.createElement('div');
+                dayHeadDiv.className = 'calendar-day-head';
+                dayHeadDiv.innerText = day;
+                container.appendChild(dayHeadDiv);
+            });
+
+            // Empty Slots before day 1
+            for (let i = 0; i < firstDay; i++) {
+                const emptyDiv = document.createElement('div');
+                emptyDiv.className = 'calendar-day empty';
+                container.appendChild(emptyDiv);
+            }
+
+            // Days of Current Month
+            const todayDate = now.getDate();
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'calendar-day' + (day === todayDate ? ' today' : '');
+                dayDiv.innerText = day;
+                container.appendChild(dayDiv);
+            }
+        }
+
+        // Login Handler
+        function handleLogin(e) {
+            e.preventDefault();
+            const memberName = document.getElementById('member-select').value;
+            const pin = document.getElementById('pin-input').value;
+
+            if (memberName && pin) {
+                document.getElementById('user-status-header').innerHTML = `
+                    <strong style="display:block;">${memberName}</strong>
+                    <span style="font-size: 11px; color: #38bdf8;">সক্রিয় সদস্য</span>
+                `;
+                openPage('home-dashboard');
+            }
+        }
+
+        // Navigation Switcher
+        function openPage(pageId) {
+            document.querySelectorAll('.view-panel').forEach(panel => panel.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+
+            const backBtn = document.getElementById('back-button');
+            const pageTitle = document.getElementById('current-page-title');
+
+            if (pageId === 'login-page') {
+                backBtn.style.display = 'none';
+                pageTitle.innerText = "সদস্য সিকিউরিটি লগইন";
+            } else if (pageId === 'home-dashboard') {
+                backBtn.style.display = 'none';
+                pageTitle.innerText = "মূল ড্যাশবোর্ড (Home Dashboard)";
+            } else {
+                backBtn.style.display = 'inline-block';
+                if (pageId === 'daily-ledger-page') pageTitle.innerText = "ডেইলি লেজার (Daily Income)";
+                else if (pageId === 'daily-expense-page') pageTitle.innerText = "ডেইলি এক্সপেন্স (Daily Expenses)";
+                else if (pageId === 'overview-page') pageTitle.innerText = "ল্যাব ওভারভিউ";
+                else if (pageId === 'members-page') pageTitle.innerText = "সদস্য ও শেয়ার রেজিস্টার";
+                else if (pageId === 'bank-page') pageTitle.innerText = "ব্যাংক ও ম্যাটেরিয়াল খরচ";
+                else if (pageId === 'profit-page') pageTitle.innerText = "লাভ-ক্ষতির হিসাব";
+            }
+        }
+
+        // Initialize Live Clock and Start Interval (Every 1 Second)
+        updateLiveClockAndCalendar();
+        setInterval(updateLiveClockAndCalendar, 1000);
+    </script>
+</body>
+</html>
