@@ -700,6 +700,13 @@
 
     <!-- Live Clock & Calendar Logic -->
     <script>
+        // User Credentials Map with Secure PINs
+        const userCredentials = {
+            "MD. Bayzid (Lab Director)": "100123",
+            "Raiyan Zayed (Dental Tech)": "100234",
+            "Maria (Lab Assistant)": "100345"
+        };
+
         let lastRenderedDate = null;
 
         // Function to update Live Clock & Render Calendar dynamically
@@ -758,18 +765,28 @@
             }
         }
 
-        // Login Handler
+        // Login Handler with PIN Verification
         function handleLogin(e) {
             e.preventDefault();
             const memberName = document.getElementById('member-select').value;
             const pin = document.getElementById('pin-input').value;
 
-            if (memberName && pin) {
+            if (!memberName) {
+                alert("অনুগ্রহ করে সদস্য নির্বাচন করুন!");
+                return;
+            }
+
+            // Check if PIN matches selected user
+            if (userCredentials[memberName] === pin) {
                 document.getElementById('user-status-header').innerHTML = `
                     <strong style="display:block;">${memberName}</strong>
                     <span style="font-size: 11px; color: #38bdf8;">সক্রিয় সদস্য</span>
                 `;
+                // Clear input pin field after success
+                document.getElementById('pin-input').value = '';
                 openPage('home-dashboard');
+            } else {
+                alert("ভুল সিকিউরিটি পিন! সঠিক পিন দিয়ে আবার চেষ্টা করুন।");
             }
         }
 
