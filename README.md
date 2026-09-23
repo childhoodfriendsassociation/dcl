@@ -1,1 +1,524 @@
-main
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dent Craft Lab - Management Dashboard</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Header */
+        header {
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            color: #ffffff;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .brand-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #38bdf8;
+        }
+
+        .brand-slogan {
+            font-size: 12px;
+            color: #93c5fd;
+            font-style: italic;
+        }
+
+        .user-badge {
+            text-align: right;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* Container & Navigation Controls */
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 15px;
+            width: 100%;
+            flex: 1;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            display: none;
+            background-color: #0284c7;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .back-btn:hover { background-color: #0369a1; }
+
+        .page-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        /* Dynamic View Switcher */
+        .view-panel { display: none; }
+        .view-panel.active {
+            display: block;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Login Grid Layout (For Login + Calendar) */
+        .login-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            align-items: start;
+        }
+
+        /* Login Card */
+        .login-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: #0284c7;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Dashboard Calendar Widget */
+        .calendar-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .calendar-header h3 { font-size: 16px; color: #0f172a; }
+
+        .live-clock {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            border: 1px solid #bae6fd;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            text-align: center;
+        }
+
+        .calendar-day-head {
+            font-weight: 700;
+            font-size: 13px;
+            color: #64748b;
+            padding: 6px 0;
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+
+        .calendar-day {
+            padding: 8px 0;
+            font-size: 13px;
+            border-radius: 6px;
+            background: #f8fafc;
+            color: #334155;
+            border: 1px solid #e2e8f0;
+        }
+
+        .calendar-day.today {
+            background: #0284c7;
+            color: #ffffff;
+            font-weight: bold;
+            border-color: #0284c7;
+            box-shadow: 0 2px 4px rgba(2, 132, 199, 0.3);
+        }
+
+        .calendar-day.empty { background: transparent; border: none; }
+
+        /* Dashboard Grid Cards */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .dash-btn-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dash-btn-card:hover {
+            transform: translateY(-3px);
+            border-color: #38bdf8;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.05);
+        }
+
+        .card-icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 22px;
+        }
+
+        .dash-btn-card h3 { font-size: 16px; margin-bottom: 6px; color: #0f172a; }
+        .dash-btn-card p { font-size: 12px; color: #64748b; margin-bottom: 12px; }
+
+        .btn-blue .card-icon-box { background: #e0f2fe; color: #0284c7; }
+        .btn-green .card-icon-box { background: #dcfce7; color: #16a34a; }
+        .btn-amber .card-icon-box { background: #fef3c7; color: #d97706; }
+        .btn-purple .card-icon-box { background: #f3e8ff; color: #9333ea; }
+        .btn-red .card-icon-box { background: #ffe4e6; color: #e11d48; }
+        .btn-teal .card-icon-box { background: #ccfbf1; color: #0d9488; }
+
+        /* Data Tables */
+        .data-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            overflow-x: auto;
+        }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { background-color: #f8fafc; color: #475569; padding: 10px 14px; font-size: 13px; text-align: left; border-bottom: 2px solid #e2e8f0; }
+        td { padding: 12px 14px; font-size: 13px; border-bottom: 1px solid #f1f5f9; }
+        
+        .text-right { text-align: right; }
+        .text-center { text-align: center; }
+
+        .total-row { background-color: #e0f2fe; font-weight: bold; color: #0369a1; }
+
+        .badge { padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .badge-paid { background: #dcfce7; color: #15803d; }
+        .badge-due { background: #fee2e2; color: #b91c1c; }
+
+        footer {
+            text-align: center;
+            padding: 16px;
+            font-size: 12px;
+            color: #94a3b8;
+            border-top: 1px solid #e2e8f0;
+            background: #ffffff;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Header -->
+    <header>
+        <div>
+            <div class="brand-title"><i class="fa-solid fa-tooth"></i> Dent Craft Lab</div>
+            <div class="brand-slogan">"Precision Dental Solutions & Management"</div>
+        </div>
+        <div class="user-badge" id="user-status-header">
+            <strong style="display:block;">CEO: MD. Bayzid</strong>
+            <span style="font-size: 11px; opacity: 0.8;">Barishal Sadar, Barishal</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Navigation Header -->
+        <div class="nav-bar">
+            <h2 class="page-title" id="current-page-title">সদস্য সিকিউরিটি লগইন</h2>
+            <button class="back-btn" id="back-button" onclick="openPage('home-dashboard')">
+                <i class="fa-solid fa-arrow-left"></i> ড্যাশবোর্ডে ফিরে যান
+            </button>
+        </div>
+
+        <!-- ================= 0. MEMBER LOGIN PAGE (WITH LIVE CALENDAR) ================= -->
+        <div id="login-page" class="view-panel active">
+            <div class="login-grid">
+                
+                <!-- Login Form -->
+                <div class="login-card">
+                    <h3 style="text-align: center; margin-bottom: 16px; color: #0f172a;">Dent Craft Lab প্যানেল লগইন</h3>
+                    <form onsubmit="handleLogin(event)">
+                        <div class="form-group">
+                            <label for="member-select">ল্যাব সদস্য নির্বাচন করুন:</label>
+                            <select id="member-select" class="form-control" required>
+                                <option value="">-- মেম্বার নির্বাচন করুন --</option>
+                                <option value="MD. Bayzid (Lab Director)">MD. Bayzid (Lab Director)</option>
+                                <option value="Raiyan Zayed (Dental Tech)">Raiyan Zayed (Dental Tech)</option>
+                                <option value="Maria (Lab Assistant)">Maria (Lab Assistant)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="pin-input">সিকিউরিটি পিন:</label>
+                            <input type="password" id="pin-input" class="form-control" placeholder="পিন লিখুন" required>
+                        </div>
+                        <button type="submit" class="btn-submit"><i class="fa-solid fa-right-to-bracket"></i> লগইন করুন</button>
+                    </form>
+                </div>
+
+                <!-- Live Calendar & Clock Widget -->
+                <div class="calendar-card">
+                    <div class="calendar-header">
+                        <h3><i class="fa-regular fa-calendar-days" style="color:#0284c7;"></i> <span id="calendar-month-year"></span></h3>
+                        <span id="current-time-text" class="live-clock"><i class="fa-regular fa-clock"></i> --:--:--</span>
+                    </div>
+                    <div class="calendar-grid" id="calendar-days-container">
+                        <!-- Dynamic Live Calendar -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ================= 1. HOME DASHBOARD ================= -->
+        <div id="home-dashboard" class="view-panel">
+            <div class="dashboard-grid">
+                
+                <div class="dash-btn-card btn-teal" onclick="openPage('daily-ledger-page')">
+                    <div class="card-icon-box"><i class="fa-solid fa-book-open"></i></div>
+                    <h3>ডেইলি লেজার (Daily Ledger)</h3>
+                    <p>দৈনিক ডেন্টাল সার্ভিস বিলিং ও রোগী ইনকামের তালিকা</p>
+                </div>
+
+                <div class="dash-btn-card btn-red" onclick="openPage('daily-expense-page')">
+                    <div class="card-icon-box"><i class="fa-solid fa-receipt"></i></div>
+                    <h3>ডেইলি এক্সপেন্স (Daily Expenses)</h3>
+                    <p>দৈনন্দিন খুচরা খরচ ও ল্যাব মেইনটেন্যান্স খরচ</p>
+                </div>
+
+                <div class="dash-btn-card btn-blue" onclick="openPage('overview-page')">
+                    <div class="card-icon-box"><i class="fa-solid fa-chart-pie"></i></div>
+                    <h3>ল্যাব ওভারভিউ</h3>
+                    <p>Dent Craft Lab-এর মোট জমা ও সার্বিক খরচের চিত্র</p>
+                </div>
+
+                <div class="dash-btn-card btn-green" onclick="openPage('members-page')">
+                    <div class="card-icon-box"><i class="fa-solid fa-users"></i></div>
+                    <h3>সদস্য ও শেয়ার রেজিস্টার</h3>
+                    <p>ল্যাব পার্টনারদের শেয়ার ও ফান্ড জমার হিসাব</p>
+                </div>
+
+                <div class="dash-btn-card btn-amber" onclick="openPage('bank-page')">
+                    <div class="card-icon-box"><i class="fa-solid fa-building-columns"></i></div>
+                    <h3>ব্যাংক ও ম্যাটেরিয়াল খরচ</h3>
+                    <p>ল্যাব অ্যাকাউন্ট ও ডেন্টাল ম্যাটেরিয়াল কেনাকাটা</p>
+                </div>
+
+                <div class="dash-btn-card btn-purple" onclick="openPage('profit-page')">
+                    <div class="card-icon-box"><i class="fa-solid fa-wallet"></i></div>
+                    <h3>লাভ-ক্ষতির হিসাব</h3>
+                    <p>ল্যাব কাজের মোট আয় ও নিট মুনাফা</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ================= DAILY LEDGER PAGE ================= -->
+        <div id="daily-ledger-page" class="view-panel">
+            <div class="data-card">
+                <h3 style="margin-bottom: 16px; color: #0f172a;">দৈনিক আয় / লেজার খাতা (Daily Income Ledger)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>তারিখ</th>
+                            <th>রোগী / ডেন্টাল ক্লিনিকের নাম</th>
+                            <th>সার্ভিসের বিবরণ</th>
+                            <th class="text-right">বিল পরিমাণ (৳)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>২২/০৯/২০২৬</td>
+                            <td>সিটি ডেন্টাল কেয়ার</td>
+                            <td>২টি জেরকোনিয়া ক্রাউন (Zirconia Crown)</td>
+                            <td class="text-right">৮,০০০</td>
+                        </tr>
+                        <tr>
+                            <td>২৩/০৯/২০২৬</td>
+                            <td>ডঃ জসিম উদ্দিন</td>
+                            <td>কমপ্লিট ডেনচার সেটিং (Complete Denture)</td>
+                            <td class="text-right">১২,০০০</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="3" class="text-right">সর্বমোট লেজার আয়:</td>
+                            <td class="text-right">৳ ২০,০০০</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ================= DAILY EXPENSE PAGE ================= -->
+        <div id="daily-expense-page" class="view-panel">
+            <div class="data-card">
+                <h3 style="margin-bottom: 16px; color: #0f172a;">দৈনন্দিন খুচরা খরচ (Daily Expenses)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>তারিখ</th>
+                            <th>খরচের খাত</th>
+                            <th>গ্রহণকারী / স্থান</th>
+                            <th class="text-right">পরিমাণ (৳)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>২২/০৯/২০২৬</td>
+                            <td>ল্যাব টি-ব্রেক ও স্ন্যাকস</td>
+                            <td>স্টাফ খরচ</td>
+                            <td class="text-right">৩৫০</td>
+                        </tr>
+                        <tr>
+                            <td>২৩/০৯/২০২৬</td>
+                            <td>ডেলিভারি বয় লোকাল ট্রান্সপোর্ট</td>
+                            <td>ক্লিনিক ডেলিভারি</td>
+                            <td class="text-right">২০০</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="3" class="text-right">সর্বমোট দৈনিক খরচ:</td>
+                            <td class="text-right">৳ ৫৫০</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ================= PAGE: OVERVIEW ================= -->
+        <div id="overview-page" class="view-panel">
+            <div class="data-card">
+                <h3 style="margin-bottom: 16px; color: #0f172a;">Dent Craft Lab - সার্বিক অর্থায়ন</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>খাত (Financial Category)</th>
+                            <th class="text-right">পরিমাণ (৳)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>মোট ল্যাব মূলধন ফান্ড (Total Lab Capital)</td>
+                            <td class="text-right">৳ ২,৪৫,০০০</td>
+                        </tr>
+                        <tr>
+                            <td>ব্যাংক রিজার্ভ (Mutual Trust Bank)</td>
+                            <td class="text-right" style="color: #16a34a; font-weight:600;">৳ ১,৯৫,০০০</td>
+                        </tr>
+                        <tr>
+                            <td>সদস্যদের বকেয়া চাঁদা (Partner Dues)</td>
+                            <td class="text-right" style="color: #dc2626; font-weight:600;">৳ ৫০,০০০</td>
+                        </tr>
+                        <tr>
+                            <td>ডেন্টাল ম্যাটেরিয়াল ও ল্যাব খরচ (Total Expenses)</td>
+                            <td class="text-right" style="color: #d97706; font-weight:600;">৳ ৮৫,০০০</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ================= PAGE: MEMBERS LEDGER ================= -->
+        <div id="members-page" class="view-panel">
+            <div class="data-card">
+                <h3 style="margin-bottom: 16px; color: #0f172a;">ল্যাব শেয়ারহোল্ডার ও পার্টনার রেজিস্টার</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>সদস্যের নাম</th>
+                            <th>শেয়ার সংখ্যা</th>
+                            <th class="text-right">মোট ফান্ড জমা (৳)</th>
+                            <th class="text-right">বকেয়া (৳)</th>
+                            <th class="text-center">স্ট্যাটাস</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>MD. Bayzid</td>
+                            <td>২টি</td>
+                            <td class="text-right">২০,০০০</td>
+                            <td class="text-right">০</td>
+                            <td class="text-center"><span class="badge badge-paid">পরিশোধিত</span></td>
+                        </tr>
+                        <tr>
+                            <td>Raiyan Zayed</td>
+                            <td>১টি</td>
+                            <td class="text-right">১০,০০০</td>
+                            <td class="text-right">২,০০০</td>
+                            <td class="text-center"><span class="badge badge-due">বাকি ২,০০০</span></td>
+                        </tr>
+                        <tr>
+                            <td>M
