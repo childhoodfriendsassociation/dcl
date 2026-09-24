@@ -226,14 +226,14 @@
 
         .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
         }
 
         .dash-btn-card {
             background: #ffffff;
             border-radius: 12px;
-            padding: 16px;
+            padding: 24px;
             text-align: center;
             border: 1px solid #e2e8f0;
             cursor: pointer;
@@ -247,25 +247,22 @@
         }
 
         .card-icon-box {
-            width: 44px;
-            height: 44px;
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 10px;
-            font-size: 20px;
+            margin: 0 auto 12px;
+            font-size: 24px;
         }
 
-        .dash-btn-card h3 { font-size: 16px; margin-bottom: 4px; color: #0f172a; }
-        .dash-btn-card p { font-size: 12px; color: #64748b; }
+        .dash-btn-card h3 { font-size: 18px; margin-bottom: 6px; color: #0f172a; }
+        .dash-btn-card p { font-size: 13px; color: #64748b; }
 
-        .btn-blue .card-icon-box { background: #e0f2fe; color: #0284c7; }
-        .btn-green .card-icon-box { background: #dcfce7; color: #16a34a; }
-        .btn-amber .card-icon-box { background: #fef3c7; color: #d97706; }
-        .btn-purple .card-icon-box { background: #f3e8ff; color: #9333ea; }
-        .btn-red .card-icon-box { background: #ffe4e6; color: #e11d48; }
         .btn-teal .card-icon-box { background: #ccfbf1; color: #0d9488; }
+        .btn-red .card-icon-box { background: #ffe4e6; color: #e11d48; }
+        .btn-purple .card-icon-box { background: #f3e8ff; color: #9333ea; }
 
         .card-header-bar {
             display: flex;
@@ -314,10 +311,6 @@
         }
 
         .total-row { background-color: #e0f2fe; font-weight: bold; color: #0369a1; }
-
-        .badge { padding: 2px 8px; border-radius: 10px; font-size: 12px; font-weight: 600; }
-        .badge-paid { background: #dcfce7; color: #15803d; }
-        .badge-due { background: #fee2e2; color: #dc2626; }
 
         footer {
             text-align: center;
@@ -392,7 +385,7 @@
 
         <div class="nav-bar">
             <div>
-                <h2 class="page-title" id="current-page-title">সদস্য লগইন</h2>
+                <h2 class="page-title" id="current-page-title">📯 স্বাগতম</h2>
                 <span class="sync-indicator" id="sync-status"><i class="fa-solid fa-cloud"></i> ক্লাউড রেডি</span>
             </div>
             <div class="nav-actions">
@@ -409,12 +402,12 @@
         <div id="login-page" class="view-panel active">
             <div class="login-grid">
                 <div class="login-card">
-                    <h3 style="text-align: center; margin-bottom: 16px; color: #0f172a;">Dent Craft Lab প্যানেল লগইন</h3>
+                    <h3 style="text-align: center; margin-bottom: 16px; color: #0f172a;">🦷সম্মানিত পরিচালকবৃন্দ লগইন করুন🦷</h3>
                     <form onsubmit="handleLogin(event)">
                         <div class="form-group">
-                            <label for="member-select">সদস্যের নাম:</label>
+                            <label for="member-select">পরিচালকের নাম:</label>
                             <select id="member-select" class="form-control" required>
-                                <option value="">সদস্য নির্বাচন করুন</option>
+                                <option value="">এখানে সিলেক্ট করুন</option>
                                 <option value="Bayzid (Founder & CEO)">Bayzid (Founder & CEO)</option>
                                 <option value="Kawser (Founder)">Kawser (Founder)</option>
                                 <option value="Ramim (Founder)">Ramim (Founder)</option>
@@ -454,24 +447,6 @@
                     <p>খুচরা ও মেইনটেন্যান্স খরচ</p>
                 </div>
 
-                <div class="dash-btn-card btn-blue" onclick="openPage('overview-page')">
-                    <div class="card-icon-box"><i class="fa-solid fa-chart-pie"></i></div>
-                    <h3>ল্যাব ওভারভিউ</h3>
-                    <p>মোট জমা ও সার্বিক খরচ</p>
-                </div>
-
-                <div class="dash-btn-card btn-green" onclick="openPage('members-page')">
-                    <div class="card-icon-box"><i class="fa-solid fa-users"></i></div>
-                    <h3>সদস্য ও শেয়ার</h3>
-                    <p>পার্টনার ও ফান্ড রেজিস্টার</p>
-                </div>
-
-                <div class="dash-btn-card btn-amber" onclick="openPage('bank-page')">
-                    <div class="card-icon-box"><i class="fa-solid fa-building-columns"></i></div>
-                    <h3>ব্যাংক ও ম্যাটেরিয়াল</h3>
-                    <p>অ্যাকাউন্ট ও সরঞ্জাম কেনাকাটা</p>
-                </div>
-
                 <div class="dash-btn-card btn-purple" onclick="openPage('profit-page')">
                     <div class="card-icon-box"><i class="fa-solid fa-wallet"></i></div>
                     <h3>লাভ-ক্ষতির হিসাব</h3>
@@ -480,7 +455,7 @@
             </div>
         </div>
 
-        <!-- DAILY LEDGER PAGE -->
+        <!-- 2. DAILY LEDGER PAGE -->
         <div id="daily-ledger-page" class="view-panel">
             <div class="entry-form-card">
                 <h4 style="margin-bottom: 12px; color: #0284c7;"><i class="fa-solid fa-plus-circle"></i> নতুন লেজার / আয় এন্ট্রি যুক্ত করুন</h4>
@@ -524,7 +499,7 @@
             </div>
         </div>
 
-        <!-- DAILY EXPENSE PAGE -->
+        <!-- 3. DAILY EXPENSE PAGE -->
         <div id="daily-expense-page" class="view-panel">
             <div class="entry-form-card">
                 <h4 style="margin-bottom: 12px; color: #e11d48;"><i class="fa-solid fa-plus-circle"></i> নতুন দৈনিক খরচ এন্ট্রি যুক্ত করুন</h4>
@@ -568,132 +543,7 @@
             </div>
         </div>
 
-        <!-- OVERVIEW PAGE -->
-        <div id="overview-page" class="view-panel">
-            <div class="entry-form-card">
-                <h4 style="margin-bottom: 12px; color: #0284c7;"><i class="fa-solid fa-plus-circle"></i> নতুন অর্থায়ন খাত যুক্ত করুন</h4>
-                <form onsubmit="addOverviewEntry(event)" class="entry-form-grid">
-                    <div style="grid-column: span 2;">
-                        <label>খাত (Financial Category):</label>
-                        <input type="text" id="overview-category" class="form-control" placeholder="খাতের বিবরণ" required>
-                    </div>
-                    <div>
-                        <label>পরিমাণ (৳):</label>
-                        <input type="number" id="overview-amount" class="form-control" placeholder="টাকা" required>
-                    </div>
-                    <div>
-                        <button type="submit" class="btn-add" style="width: 100%;"><i class="fa-solid fa-plus"></i> যোগ করুন</button>
-                    </div>
-                </form>
-            </div>
-
-            <div class="data-card">
-                <div class="card-header-bar">
-                    <h3 style="color: #0f172a;">Dent Craft Lab - সার্বিক অর্থায়ন</h3>
-                    <button class="btn-print" onclick="window.print()"><i class="fa-solid fa-print"></i> প্রিন্ট</button>
-                </div>
-                <table>
-                    <thead>
-                        <tr><th>খাত (Financial Category)</th><th class="text-right">পরিমাণ (৳)</th><th class="text-center">এন্ট্রি বাই (User)</th></tr>
-                    </thead>
-                    <tbody id="overview-table-body"></tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- MEMBERS LEDGER PAGE -->
-        <div id="members-page" class="view-panel">
-            <div class="entry-form-card">
-                <h4 style="margin-bottom: 12px; color: #16a34a;"><i class="fa-solid fa-user-plus"></i> নতুন সদস্য / পার্টনার যুক্ত করুন</h4>
-                <form onsubmit="addMemberEntry(event)" class="entry-form-grid">
-                    <div>
-                        <label>সদস্যের নাম:</label>
-                        <input type="text" id="member-name" class="form-control" placeholder="নাম" required>
-                    </div>
-                    <div>
-                        <label>শেয়ার সংখ্যা:</label>
-                        <input type="text" id="member-share" class="form-control" placeholder="যেমন: ১টি" required>
-                    </div>
-                    <div>
-                        <label>মোট ফান্ড (৳):</label>
-                        <input type="number" id="member-fund" class="form-control" placeholder="টাকা" required>
-                    </div>
-                    <div>
-                        <label>বকেয়া (৳):</label>
-                        <input type="number" id="member-dues" class="form-control" placeholder="টাকা" value="0" required>
-                    </div>
-                    <div>
-                        <button type="submit" class="btn-add" style="width: 100%;"><i class="fa-solid fa-plus"></i> যোগ করুন</button>
-                    </div>
-                </form>
-            </div>
-
-            <div class="data-card">
-                <div class="card-header-bar">
-                    <h3 style="color: #0f172a;">ল্যাব শেয়ারহোল্ডার ও পার্টনার রেজিস্টার</h3>
-                    <button class="btn-print" onclick="window.print()"><i class="fa-solid fa-print"></i> প্রিন্ট</button>
-                </div>
-                <table>
-                    <thead>
-                        <tr><th>সদস্যের নাম</th><th>শেয়ার</th><th class="text-right">মোট ফান্ড (৳)</th><th class="text-right">বকেয়া (৳)</th><th class="text-center">স্ট্যাটাস</th><th class="text-center">এন্ট্রি বাই (User)</th></tr>
-                    </thead>
-                    <tbody id="member-table-body"></tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- BANK & ASSETS PAGE -->
-        <div id="bank-page" class="view-panel">
-            <div class="entry-form-card">
-                <h4 style="margin-bottom: 12px; color: #d97706;"><i class="fa-solid fa-plus-circle"></i> নতুন কেনাকাটা / ব্যাংক লেনদেন এন্ট্রি</h4>
-                <form onsubmit="addBankEntry(event)" class="entry-form-grid">
-                    <div>
-                        <label>তারিখ:</label>
-                        <input type="date" id="bank-date" class="form-control" required>
-                    </div>
-                    <div>
-                        <label>বিবরণ / খাত:</label>
-                        <input type="text" id="bank-desc" class="form-control" placeholder="সরঞ্জাম বা খাতের বিবরণ" required>
-                    </div>
-                    <div>
-                        <label>পেমেন্ট মাধ্যম:</label>
-                        <select id="bank-method" class="form-control">
-                            <option value="ব্যাংক ট্র্যান্সফার">ব্যাংক ট্র্যান্সফার</option>
-                            <option value="নগদ (Cash)">নগদ (Cash)</option>
-                            <option value="মোবাইল ব্যাংকিং">মোবাইল ব্যাংকিং</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>পরিমাণ (৳):</label>
-                        <input type="number" id="bank-amount" class="form-control" placeholder="টাকা" required>
-                    </div>
-                    <div>
-                        <button type="submit" class="btn-add" style="width: 100%; background-color: #d97706;"><i class="fa-solid fa-plus"></i> যোগ করুন</button>
-                    </div>
-                </form>
-            </div>
-
-            <div class="data-card">
-                <div class="card-header-bar">
-                    <h3 style="color: #0f172a;">ব্যাংক লেনদেন ও ইকুইপমেন্ট ক্রয়</h3>
-                    <button class="btn-print" onclick="window.print()"><i class="fa-solid fa-print"></i> প্রিন্ট</button>
-                </div>
-                <p style="margin-bottom: 10px; font-size: 13px; color: #475569;">
-                    <strong>ব্যাংক অ্যাকাউন্ট:</strong> Dent Craft Lab Operations | <strong>ব্যাংক:</strong> Mutual Trust Bank
-                </p>
-                <table>
-                    <thead>
-                        <tr><th>তারিখ</th><th>বিবরণ / খাত</th><th>পেমেন্ট মাধ্যম</th><th class="text-right">পরিমাণ (৳)</th><th class="text-center">এন্ট্রি বাই (User)</th></tr>
-                    </thead>
-                    <tbody id="bank-table-body"></tbody>
-                    <tfoot>
-                        <tr class="total-row"><td colspan="3" class="text-right">মোট খরচ:</td><td class="text-right" id="bank-total">৳ ০</td><td></td></tr>
-                    </tfoot>
-                </table>
-            </div>
-        </div>
-
-        <!-- PROFIT & LOSS PAGE -->
+        <!-- 4. PROFIT & LOSS PAGE -->
         <div id="profit-page" class="view-panel">
             <div class="data-card">
                 <div class="card-header-bar">
@@ -831,9 +681,6 @@
                 logoutBtn.style.display = 'inline-block';
                 if (pageId === 'daily-ledger-page') pageTitle.innerText = "ডেইলি লেজার (Daily Income)";
                 else if (pageId === 'daily-expense-page') pageTitle.innerText = "ডেইলি এক্সপেন্স (Daily Expenses)";
-                else if (pageId === 'overview-page') pageTitle.innerText = "ল্যাব ওভারভিউ";
-                else if (pageId === 'members-page') pageTitle.innerText = "সদস্য ও শেয়ার রেজিস্টার";
-                else if (pageId === 'bank-page') pageTitle.innerText = "ব্যাংক ও ম্যাটেরিয়াল খরচ";
                 else if (pageId === 'profit-page') {
                     pageTitle.innerText = "লাভ-ক্ষতির হিসাব";
                     updateProfitLossPage();
@@ -897,9 +744,6 @@
 
                 renderLedgerTable(data.Ledger || []);
                 renderExpenseTable(data.Expense || []);
-                renderOverviewTable(data.Overview || []);
-                renderMemberTable(data.Members || []);
-                renderBankTable(data.Bank || []);
 
                 updateSyncStatus('ready');
             } catch(err) {
@@ -930,39 +774,6 @@
                 tbody.appendChild(tr);
             });
             calculateExpenseTotal();
-        }
-
-        function renderOverviewTable(rows) {
-            const tbody = document.getElementById('overview-table-body');
-            tbody.innerHTML = '';
-            rows.forEach(r => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `<td>${r[0]}</td><td class="text-right">${r[1]}</td><td class="text-center"><span class="user-tag"><i class="fa-regular fa-user"></i> ${r[2]}</span></td>`;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function renderMemberTable(rows) {
-            const tbody = document.getElementById('member-table-body');
-            tbody.innerHTML = '';
-            rows.forEach(r => {
-                const dues = parseFloat(r[3]) || 0;
-                const statusBadge = dues > 0 ? `<span class="badge badge-due">বকেয়া</span>` : `<span class="badge badge-paid">পরিশোধিত</span>`;
-                const tr = document.createElement('tr');
-                tr.innerHTML = `<td>${r[0]}</td><td>${r[1]}</td><td class="text-right">${Number(r[2]).toLocaleString('bn-BD')}</td><td class="text-right">${Number(r[3]).toLocaleString('bn-BD')}</td><td class="text-center">${statusBadge}</td><td class="text-center"><span class="user-tag"><i class="fa-regular fa-user"></i> ${r[4]}</span></td>`;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function renderBankTable(rows) {
-            const tbody = document.getElementById('bank-table-body');
-            tbody.innerHTML = '';
-            rows.forEach(r => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `<td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="text-right">${r[3]}</td><td class="text-center"><span class="user-tag"><i class="fa-regular fa-user"></i> ${r[4]}</span></td>`;
-                tbody.appendChild(tr);
-            });
-            calculateBankTotal();
         }
 
         // --- FORM SUBMIT HANDLERS ---
@@ -997,49 +808,6 @@
             setTimeout(fetchAllDataFromSheet, 1000);
         }
 
-        async function addOverviewEntry(e) {
-            e.preventDefault();
-            const cat = document.getElementById('overview-category').value;
-            const amount = parseFloat(document.getElementById('overview-amount').value);
-            const userTag = getCurrentUserShortName();
-
-            const rowData = [cat, amount, userTag];
-            e.target.reset();
-
-            await saveToSheet('Overview', rowData);
-            setTimeout(fetchAllDataFromSheet, 1000);
-        }
-
-        async function addMemberEntry(e) {
-            e.preventDefault();
-            const name = document.getElementById('member-name').value;
-            const share = document.getElementById('member-share').value;
-            const fund = parseFloat(document.getElementById('member-fund').value);
-            const dues = parseFloat(document.getElementById('member-dues').value);
-            const userTag = getCurrentUserShortName();
-
-            const rowData = [name, share, fund, dues, userTag];
-            e.target.reset();
-
-            await saveToSheet('Members', rowData);
-            setTimeout(fetchAllDataFromSheet, 1000);
-        }
-
-        async function addBankEntry(e) {
-            e.preventDefault();
-            const date = formatDate(document.getElementById('bank-date').value);
-            const desc = document.getElementById('bank-desc').value;
-            const method = document.getElementById('bank-method').value;
-            const amount = parseFloat(document.getElementById('bank-amount').value);
-            const userTag = getCurrentUserShortName();
-
-            const rowData = [date, desc, method, amount, userTag];
-            e.target.reset();
-
-            await saveToSheet('Bank', rowData);
-            setTimeout(fetchAllDataFromSheet, 1000);
-        }
-
         // --- CALCULATIONS ---
 
         function calculateLedgerTotal() {
@@ -1063,18 +831,6 @@
                 }
             });
             document.getElementById('expense-total').innerText = '৳ ' + total.toLocaleString('bn-BD');
-            return total;
-        }
-
-        function calculateBankTotal() {
-            let total = 0;
-            document.querySelectorAll('#bank-table-body tr').forEach(tr => {
-                if(tr.children[3]) {
-                    const val = parseFloat(tr.children[3].innerText.replace(/,/g, '')) || 0;
-                    total += val;
-                }
-            });
-            document.getElementById('bank-total').innerText = '৳ ' + total.toLocaleString('bn-BD');
             return total;
         }
 
