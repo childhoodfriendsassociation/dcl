@@ -26,7 +26,6 @@
             font-size: 15px;
         }
 
-        /* Top Header (Web View) */
         header {
             background: linear-gradient(135deg, #0f172a, #1e3a8a);
             color: #ffffff;
@@ -57,7 +56,6 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        /* Container & Navigation Controls */
         .container {
             max-width: 1100px;
             margin: 20px auto;
@@ -101,16 +99,10 @@
             color: #0f172a;
         }
 
-        /* Print-Only Official Header Pad */
-        .print-official-header {
-            display: none;
-        }
-
-        /* Dynamic View Switcher */
+        .print-official-header { display: none; }
         .view-panel { display: none; }
         .view-panel.active { display: block; }
 
-        /* Login Grid Layout */
         .login-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -149,7 +141,6 @@
             cursor: pointer;
         }
 
-        /* Entry Forms Style */
         .entry-form-card {
             background: #ffffff;
             border-radius: 12px;
@@ -179,7 +170,6 @@
         }
         .btn-add:hover { background: #15803d; }
 
-        /* Calendar Widget */
         .calendar-header {
             display: flex;
             justify-content: space-between;
@@ -234,7 +224,6 @@
 
         .calendar-day.empty { background: transparent; border: none; }
 
-        /* Dashboard Grid */
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -278,7 +267,6 @@
         .btn-red .card-icon-box { background: #ffe4e6; color: #e11d48; }
         .btn-teal .card-icon-box { background: #ccfbf1; color: #0d9488; }
 
-        /* Data Tables Header Bar */
         .card-header-bar {
             display: flex;
             justify-content: space-between;
@@ -299,7 +287,6 @@
 
         .btn-print:hover { background-color: #334155; }
 
-        /* Data Tables */
         .data-card {
             background: #ffffff;
             border-radius: 12px;
@@ -342,7 +329,14 @@
             margin-top: auto;
         }
 
-        /* Specific Print Media Styles */
+        .sync-indicator {
+            font-size: 12px;
+            color: #0284c7;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
         @media print {
             header, .nav-bar, footer, .btn-print, .entry-form-card { 
                 display: none !important; 
@@ -377,7 +371,6 @@
 </head>
 <body>
 
-    <!-- Top Header (Visible on Screen) -->
     <header>
         <div>
             <div class="brand-title"><i class="fa-solid fa-tooth"></i> Dent Craft Lab</div>
@@ -391,16 +384,17 @@
 
     <div class="container">
 
-        <!-- Official Print Header (Only appears on Printouts) -->
         <div class="print-official-header">
             <h1>Dent Craft Lab</h1>
             <p><strong>Precision Dental Solutions & Management</strong></p>
             <p>New Circular Road, Barishal Sadar, Barishal | Phone: +880 1700-000000</p>
         </div>
 
-        <!-- Navigation Header -->
         <div class="nav-bar">
-            <h2 class="page-title" id="current-page-title">সদস্য লগইন</h2>
+            <div>
+                <h2 class="page-title" id="current-page-title">সদস্য লগইন</h2>
+                <span class="sync-indicator" id="sync-status"><i class="fa-solid fa-cloud"></i> ক্লাউড রেডি</span>
+            </div>
             <div class="nav-actions">
                 <button class="back-btn" id="back-button" onclick="openPage('home-dashboard')">
                     <i class="fa-solid fa-arrow-left"></i> ড্যাশবোর্ডে ফিরে যান
@@ -411,11 +405,9 @@
             </div>
         </div>
 
-        <!-- ================= 0. MEMBER LOGIN PAGE ================= -->
+        <!-- 0. MEMBER LOGIN PAGE -->
         <div id="login-page" class="view-panel active">
             <div class="login-grid">
-                
-                <!-- Login Form -->
                 <div class="login-card">
                     <h3 style="text-align: center; margin-bottom: 16px; color: #0f172a;">Dent Craft Lab প্যানেল লগইন</h3>
                     <form onsubmit="handleLogin(event)">
@@ -437,7 +429,6 @@
                     </form>
                 </div>
 
-                <!-- Live Calendar & Clock Widget -->
                 <div class="calendar-card">
                     <div class="calendar-header">
                         <h3><i class="fa-regular fa-calendar-days" style="color:#0284c7;"></i> <span id="calendar-month-year"></span></h3>
@@ -445,14 +436,12 @@
                     </div>
                     <div class="calendar-grid" id="calendar-days-container"></div>
                 </div>
-
             </div>
         </div>
 
-        <!-- ================= 1. HOME DASHBOARD ================= -->
+        <!-- 1. HOME DASHBOARD -->
         <div id="home-dashboard" class="view-panel">
             <div class="dashboard-grid">
-                
                 <div class="dash-btn-card btn-teal" onclick="openPage('daily-ledger-page')">
                     <div class="card-icon-box"><i class="fa-solid fa-book-open"></i></div>
                     <h3>ডেইলি লেজার</h3>
@@ -488,14 +477,11 @@
                     <h3>লাভ-ক্ষতির হিসাব</h3>
                     <p>ল্যাব আয় ও নিট মুনাফা</p>
                 </div>
-
             </div>
         </div>
 
-        <!-- ================= DAILY LEDGER PAGE ================= -->
+        <!-- DAILY LEDGER PAGE -->
         <div id="daily-ledger-page" class="view-panel">
-            
-            <!-- Add New Entry Form -->
             <div class="entry-form-card">
                 <h4 style="margin-bottom: 12px; color: #0284c7;"><i class="fa-solid fa-plus-circle"></i> নতুন লেজার / আয় এন্ট্রি যুক্ত করুন</h4>
                 <form onsubmit="addLedgerEntry(event)" class="entry-form-grid">
@@ -530,8 +516,7 @@
                     <thead>
                         <tr><th>তারিখ</th><th>ডেন্টাল ক্লিনিকের নাম</th><th>সার্ভিসের বিবরণ</th><th class="text-right">বিল পরিমাণ (৳)</th><th class="text-center">এন্ট্রি বাই (User)</th></tr>
                     </thead>
-                    <tbody id="ledger-table-body">
-                    </tbody>
+                    <tbody id="ledger-table-body"></tbody>
                     <tfoot>
                         <tr class="total-row"><td colspan="3" class="text-right">সর্বমোট লেজার আয়:</td><td class="text-right" id="ledger-total">৳ ০</td><td></td></tr>
                     </tfoot>
@@ -539,10 +524,8 @@
             </div>
         </div>
 
-        <!-- ================= DAILY EXPENSE PAGE ================= -->
+        <!-- DAILY EXPENSE PAGE -->
         <div id="daily-expense-page" class="view-panel">
-            
-            <!-- Add New Expense Form -->
             <div class="entry-form-card">
                 <h4 style="margin-bottom: 12px; color: #e11d48;"><i class="fa-solid fa-plus-circle"></i> নতুন দৈনিক খরচ এন্ট্রি যুক্ত করুন</h4>
                 <form onsubmit="addExpenseEntry(event)" class="entry-form-grid">
@@ -577,8 +560,7 @@
                     <thead>
                         <tr><th>তারিখ</th><th>খরচের খাত</th><th>গ্রহণকারী / স্থান</th><th class="text-right">পরিমাণ (৳)</th><th class="text-center">এন্ট্রি বাই (User)</th></tr>
                     </thead>
-                    <tbody id="expense-table-body">
-                    </tbody>
+                    <tbody id="expense-table-body"></tbody>
                     <tfoot>
                         <tr class="total-row"><td colspan="3" class="text-right">সর্বমোট দৈনিক খরচ:</td><td class="text-right" id="expense-total">৳ ০</td><td></td></tr>
                     </tfoot>
@@ -586,9 +568,8 @@
             </div>
         </div>
 
-        <!-- ================= PAGE: OVERVIEW ================= -->
+        <!-- OVERVIEW PAGE -->
         <div id="overview-page" class="view-panel">
-            
             <div class="entry-form-card">
                 <h4 style="margin-bottom: 12px; color: #0284c7;"><i class="fa-solid fa-plus-circle"></i> নতুন অর্থায়ন খাত যুক্ত করুন</h4>
                 <form onsubmit="addOverviewEntry(event)" class="entry-form-grid">
@@ -615,15 +596,13 @@
                     <thead>
                         <tr><th>খাত (Financial Category)</th><th class="text-right">পরিমাণ (৳)</th><th class="text-center">এন্ট্রি বাই (User)</th></tr>
                     </thead>
-                    <tbody id="overview-table-body">
-                    </tbody>
+                    <tbody id="overview-table-body"></tbody>
                 </table>
             </div>
         </div>
 
-        <!-- ================= PAGE: MEMBERS LEDGER ================= -->
+        <!-- MEMBERS LEDGER PAGE -->
         <div id="members-page" class="view-panel">
-            
             <div class="entry-form-card">
                 <h4 style="margin-bottom: 12px; color: #16a34a;"><i class="fa-solid fa-user-plus"></i> নতুন সদস্য / পার্টনার যুক্ত করুন</h4>
                 <form onsubmit="addMemberEntry(event)" class="entry-form-grid">
@@ -658,15 +637,13 @@
                     <thead>
                         <tr><th>সদস্যের নাম</th><th>শেয়ার</th><th class="text-right">মোট ফান্ড (৳)</th><th class="text-right">বকেয়া (৳)</th><th class="text-center">স্ট্যাটাস</th><th class="text-center">এন্ট্রি বাই (User)</th></tr>
                     </thead>
-                    <tbody id="member-table-body">
-                    </tbody>
+                    <tbody id="member-table-body"></tbody>
                 </table>
             </div>
         </div>
 
-        <!-- ================= PAGE: BANK & ASSETS ================= -->
+        <!-- BANK & ASSETS PAGE -->
         <div id="bank-page" class="view-panel">
-            
             <div class="entry-form-card">
                 <h4 style="margin-bottom: 12px; color: #d97706;"><i class="fa-solid fa-plus-circle"></i> নতুন কেনাকাটা / ব্যাংক লেনদেন এন্ট্রি</h4>
                 <form onsubmit="addBankEntry(event)" class="entry-form-grid">
@@ -708,8 +685,7 @@
                     <thead>
                         <tr><th>তারিখ</th><th>বিবরণ / খাত</th><th>পেমেন্ট মাধ্যম</th><th class="text-right">পরিমাণ (৳)</th><th class="text-center">এন্ট্রি বাই (User)</th></tr>
                     </thead>
-                    <tbody id="bank-table-body">
-                    </tbody>
+                    <tbody id="bank-table-body"></tbody>
                     <tfoot>
                         <tr class="total-row"><td colspan="3" class="text-right">মোট খরচ:</td><td class="text-right" id="bank-total">৳ ০</td><td></td></tr>
                     </tfoot>
@@ -717,7 +693,7 @@
             </div>
         </div>
 
-        <!-- ================= PAGE: PROFIT & LOSS ================= -->
+        <!-- PROFIT & LOSS PAGE -->
         <div id="profit-page" class="view-panel">
             <div class="data-card">
                 <div class="card-header-bar">
@@ -736,14 +712,15 @@
 
     </div>
 
-    <!-- Footer -->
     <footer>
         <div>Dent Craft Lab — New Circular Road, Barishal Sadar, Barishal | Precision Dental Solutions</div>
         <div style="margin-top: 4px;">© 2026, Dent Craft Lab | Developer: Abdul Awal, Dubai, UAE</div>
     </footer>
 
-    <!-- Logic Script -->
     <script>
+        // আপনার গুগল অ্যাপস স্ক্রিপ্ট ডিপ্লয়মেন্ট লিঙ্কটি নিচে বসান
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw6Ohij_Ztbj_FI9g9M24AeGJN7hprQd9ENsHsrKwZqBIeSoVF0Jrk6iqnWa8OfTykY8Q/exec";
+
         const userCredentials = {
             "Bayzid (Founder & CEO)": "100123",
             "Kawser (Founder)": "100234",
@@ -751,7 +728,6 @@
             "Abdul Awal (IT Manager)": "100456"
         };
 
-        // বর্তমান লগইন করা ইউজারের ডাটা ধরে রাখার ভ্যারিয়েবল
         let loggedInUser = null;
         let lastRenderedDate = null;
 
@@ -769,7 +745,6 @@
         function renderCalendar(now) {
             const year = now.getFullYear();
             const month = now.getMonth();
-
             const monthNames = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
             const dayHeadings = ["রবি", "সোম", "মঙ্গল", "বুধ", "বৃহঃ", "শুক্র", "শনি"];
 
@@ -777,7 +752,6 @@
 
             const firstDay = new Date(year, month, 1).getDay();
             const daysInMonth = new Date(year, month + 1, 0).getDate();
-
             const container = document.getElementById('calendar-days-container');
             container.innerHTML = '';
 
@@ -814,14 +788,14 @@
             }
 
             if (userCredentials[memberName] === pin) {
-                loggedInUser = memberName; // লগইন ইউজার সেট করা হলো
-
+                loggedInUser = memberName;
                 document.getElementById('user-status-header').innerHTML = `
                     <strong style="display:block;">${loggedInUser}</strong>
                     <span style="font-size: 11px; color: #38bdf8;">সক্রিয় সদস্য</span>
                 `;
                 document.getElementById('pin-input').value = '';
                 openPage('home-dashboard');
+                fetchAllDataFromSheet();
             } else {
                 alert("ভুল সিকিউরিটি পিন! সঠিক পিন দিয়ে আবার চেষ্টা করুন।");
             }
@@ -867,8 +841,6 @@
             }
         }
 
-        /* --- ADD DATA FUNCTIONS (With Auto User Stamp) --- */
-
         function formatDate(dateStr) {
             if(!dateStr) return '';
             const parts = dateStr.split('-');
@@ -877,11 +849,125 @@
 
         function getCurrentUserShortName() {
             if(!loggedInUser) return "System";
-            // সম্পূর্ণ নাম থেকে সংক্ষিপ্ত নাম বা রোল তৈরি
             return loggedInUser.split(' ')[0] + ' ' + loggedInUser.split(' ')[1];
         }
 
-        function addLedgerEntry(e) {
+        function updateSyncStatus(status) {
+            const el = document.getElementById('sync-status');
+            if(status === 'saving') {
+                el.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...`;
+            } else if(status === 'loading') {
+                el.innerHTML = `<i class="fa-solid fa-cloud-arrow-down fa-bounce"></i> ডাটা সিঙ্ক হচ্ছে...`;
+            } else {
+                el.innerHTML = `<i class="fa-solid fa-cloud"></i> ক্লাউড সিঙ্কড`;
+            }
+        }
+
+        // --- GOOGLE SHEET SYNCING LOGIC ---
+
+        async function saveToSheet(sheetName, rowData) {
+            if (SCRIPT_URL === "https://script.google.com/macros/s/AKfycbw6Ohij_Ztbj_FI9g9M24AeGJN7hprQd9ENsHsrKwZqBIeSoVF0Jrk6iqnWa8OfTykY8Q/exec") {
+                alert("অনুগ্রহ করে অ্যাপসে আপনার Google Apps Script URL সেট করুন।");
+                return false;
+            }
+            updateSyncStatus('saving');
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sheet: sheetName, row: rowData })
+                });
+                updateSyncStatus('ready');
+                return true;
+            } catch (err) {
+                console.error(err);
+                alert("ডাটা সেভ করতে সমস্যা হয়েছে। ইন্টারনেট কানেকশন চেক করুন।");
+                updateSyncStatus('ready');
+                return false;
+            }
+        }
+
+        async function fetchAllDataFromSheet() {
+            if (SCRIPT_URL === "https://script.google.com/macros/s/AKfycbw6Ohij_Ztbj_FI9g9M24AeGJN7hprQd9ENsHsrKwZqBIeSoVF0Jrk6iqnWa8OfTykY8Q/exec") return;
+            updateSyncStatus('loading');
+            try {
+                const res = await fetch(SCRIPT_URL);
+                const data = await res.json();
+
+                renderLedgerTable(data.Ledger || []);
+                renderExpenseTable(data.Expense || []);
+                renderOverviewTable(data.Overview || []);
+                renderMemberTable(data.Members || []);
+                renderBankTable(data.Bank || []);
+
+                updateSyncStatus('ready');
+            } catch(err) {
+                console.error(err);
+                updateSyncStatus('ready');
+            }
+        }
+
+        // --- RENDER TABLES ---
+
+        function renderLedgerTable(rows) {
+            const tbody = document.getElementById('ledger-table-body');
+            tbody.innerHTML = '';
+            rows.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="text-right">${r[3]}</td><td class="text-center"><span class="user-tag"><i class="fa-regular fa-user"></i> ${r[4]}</span></td>`;
+                tbody.appendChild(tr);
+            });
+            calculateLedgerTotal();
+        }
+
+        function renderExpenseTable(rows) {
+            const tbody = document.getElementById('expense-table-body');
+            tbody.innerHTML = '';
+            rows.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="text-right">${r[3]}</td><td class="text-center"><span class="user-tag"><i class="fa-regular fa-user"></i> ${r[4]}</span></td>`;
+                tbody.appendChild(tr);
+            });
+            calculateExpenseTotal();
+        }
+
+        function renderOverviewTable(rows) {
+            const tbody = document.getElementById('overview-table-body');
+            tbody.innerHTML = '';
+            rows.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${r[0]}</td><td class="text-right">${r[1]}</td><td class="text-center"><span class="user-tag"><i class="fa-regular fa-user"></i> ${r[2]}</span></td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderMemberTable(rows) {
+            const tbody = document.getElementById('member-table-body');
+            tbody.innerHTML = '';
+            rows.forEach(r => {
+                const dues = parseFloat(r[3]) || 0;
+                const statusBadge = dues > 0 ? `<span class="badge badge-due">বকেয়া</span>` : `<span class="badge badge-paid">পরিশোধিত</span>`;
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${r[0]}</td><td>${r[1]}</td><td class="text-right">${Number(r[2]).toLocaleString('bn-BD')}</td><td class="text-right">${Number(r[3]).toLocaleString('bn-BD')}</td><td class="text-center">${statusBadge}</td><td class="text-center"><span class="user-tag"><i class="fa-regular fa-user"></i> ${r[4]}</span></td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderBankTable(rows) {
+            const tbody = document.getElementById('bank-table-body');
+            tbody.innerHTML = '';
+            rows.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="text-right">${r[3]}</td><td class="text-center"><span class="user-tag"><i class="fa-regular fa-user"></i> ${r[4]}</span></td>`;
+                tbody.appendChild(tr);
+            });
+            calculateBankTotal();
+        }
+
+        // --- FORM SUBMIT HANDLERS ---
+
+        async function addLedgerEntry(e) {
             e.preventDefault();
             const date = formatDate(document.getElementById('ledger-date').value);
             const clinic = document.getElementById('ledger-clinic').value;
@@ -889,21 +975,14 @@
             const amount = parseFloat(document.getElementById('ledger-amount').value);
             const userTag = getCurrentUserShortName();
 
-            const tbody = document.getElementById('ledger-table-body');
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${date}</td>
-                <td>${clinic}</td>
-                <td>${service}</td>
-                <td class="text-right">${amount}</td>
-                <td class="text-center"><span class="user-tag"><i class="fa-regular fa-user"></i> ${userTag}</span></td>
-            `;
-            tbody.appendChild(row);
-            calculateLedgerTotal();
+            const rowData = [date, clinic, service, amount, userTag];
             e.target.reset();
+            
+            await saveToSheet('Ledger', rowData);
+            setTimeout(fetchAllDataFromSheet, 1000);
         }
 
-        function addExpenseEntry(e) {
+        async function addExpenseEntry(e) {
             e.preventDefault();
             const date = formatDate(document.getElementById('expense-date').value);
             const sector = document.getElementById('expense-sector').value;
@@ -911,38 +990,27 @@
             const amount = parseFloat(document.getElementById('expense-amount').value);
             const userTag = getCurrentUserShortName();
 
-            const tbody = document.getElementById('expense-table-body');
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${date}</td>
-                <td>${sector}</td>
-                <td>${payee}</td>
-                <td class="text-right">${amount}</td>
-                <td class="text-center"><span class="user-tag"><i class="fa-regular fa-user"></i> ${userTag}</span></td>
-            `;
-            tbody.appendChild(row);
-            calculateExpenseTotal();
+            const rowData = [date, sector, payee, amount, userTag];
             e.target.reset();
+
+            await saveToSheet('Expense', rowData);
+            setTimeout(fetchAllDataFromSheet, 1000);
         }
 
-        function addOverviewEntry(e) {
+        async function addOverviewEntry(e) {
             e.preventDefault();
             const cat = document.getElementById('overview-category').value;
             const amount = parseFloat(document.getElementById('overview-amount').value);
             const userTag = getCurrentUserShortName();
 
-            const tbody = document.getElementById('overview-table-body');
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${cat}</td>
-                <td class="text-right">${amount}</td>
-                <td class="text-center"><span class="user-tag"><i class="fa-regular fa-user"></i> ${userTag}</span></td>
-            `;
-            tbody.appendChild(row);
+            const rowData = [cat, amount, userTag];
             e.target.reset();
+
+            await saveToSheet('Overview', rowData);
+            setTimeout(fetchAllDataFromSheet, 1000);
         }
 
-        function addMemberEntry(e) {
+        async function addMemberEntry(e) {
             e.preventDefault();
             const name = document.getElementById('member-name').value;
             const share = document.getElementById('member-share').value;
@@ -950,25 +1018,14 @@
             const dues = parseFloat(document.getElementById('member-dues').value);
             const userTag = getCurrentUserShortName();
 
-            const statusBadge = dues > 0 
-                ? `<span class="badge badge-due">বকেয়া</span>` 
-                : `<span class="badge badge-paid">পরিশোধিত</span>`;
-
-            const tbody = document.getElementById('member-table-body');
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${name}</td>
-                <td>${share}</td>
-                <td class="text-right">${fund.toLocaleString('bn-BD')}</td>
-                <td class="text-right">${dues.toLocaleString('bn-BD')}</td>
-                <td class="text-center">${statusBadge}</td>
-                <td class="text-center"><span class="user-tag"><i class="fa-regular fa-user"></i> ${userTag}</span></td>
-            `;
-            tbody.appendChild(row);
+            const rowData = [name, share, fund, dues, userTag];
             e.target.reset();
+
+            await saveToSheet('Members', rowData);
+            setTimeout(fetchAllDataFromSheet, 1000);
         }
 
-        function addBankEntry(e) {
+        async function addBankEntry(e) {
             e.preventDefault();
             const date = formatDate(document.getElementById('bank-date').value);
             const desc = document.getElementById('bank-desc').value;
@@ -976,27 +1033,22 @@
             const amount = parseFloat(document.getElementById('bank-amount').value);
             const userTag = getCurrentUserShortName();
 
-            const tbody = document.getElementById('bank-table-body');
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${date}</td>
-                <td>${desc}</td>
-                <td>${method}</td>
-                <td class="text-right">${amount}</td>
-                <td class="text-center"><span class="user-tag"><i class="fa-regular fa-user"></i> ${userTag}</span></td>
-            `;
-            tbody.appendChild(row);
-            calculateBankTotal();
+            const rowData = [date, desc, method, amount, userTag];
             e.target.reset();
+
+            await saveToSheet('Bank', rowData);
+            setTimeout(fetchAllDataFromSheet, 1000);
         }
 
-        /* --- CALCULATION HELPER FUNCTIONS --- */
+        // --- CALCULATIONS ---
 
         function calculateLedgerTotal() {
             let total = 0;
             document.querySelectorAll('#ledger-table-body tr').forEach(tr => {
-                const val = parseFloat(tr.children[3].innerText.replace(/,/g, '')) || 0;
-                total += val;
+                if(tr.children[3]) {
+                    const val = parseFloat(tr.children[3].innerText.replace(/,/g, '')) || 0;
+                    total += val;
+                }
             });
             document.getElementById('ledger-total').innerText = '৳ ' + total.toLocaleString('bn-BD');
             return total;
@@ -1005,8 +1057,10 @@
         function calculateExpenseTotal() {
             let total = 0;
             document.querySelectorAll('#expense-table-body tr').forEach(tr => {
-                const val = parseFloat(tr.children[3].innerText.replace(/,/g, '')) || 0;
-                total += val;
+                if(tr.children[3]) {
+                    const val = parseFloat(tr.children[3].innerText.replace(/,/g, '')) || 0;
+                    total += val;
+                }
             });
             document.getElementById('expense-total').innerText = '৳ ' + total.toLocaleString('bn-BD');
             return total;
@@ -1015,8 +1069,10 @@
         function calculateBankTotal() {
             let total = 0;
             document.querySelectorAll('#bank-table-body tr').forEach(tr => {
-                const val = parseFloat(tr.children[3].innerText.replace(/,/g, '')) || 0;
-                total += val;
+                if(tr.children[3]) {
+                    const val = parseFloat(tr.children[3].innerText.replace(/,/g, '')) || 0;
+                    total += val;
+                }
             });
             document.getElementById('bank-total').innerText = '৳ ' + total.toLocaleString('bn-BD');
             return total;
@@ -1032,7 +1088,6 @@
             document.getElementById('profit-net').innerText = '৳ ' + netProfit.toLocaleString('bn-BD');
         }
 
-        // Initialize Live Clock and Calendar
         updateLiveClockAndCalendar();
         setInterval(updateLiveClockAndCalendar, 1000);
     </script>
