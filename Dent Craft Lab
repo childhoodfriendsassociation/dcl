@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dent Craft Lab - Management Dashboard</title>
-    <!-- Google Fonts & FontAwesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- SolaimanLipi Font & FontAwesome -->
+    <link href="https://fonts.maateen.me/solaiman-lipi/font.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -13,7 +14,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Hind Siliguri', sans-serif;
+            font-family: 'SolaimanLipi', sans-serif;
         }
 
         body {
@@ -22,9 +23,9 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            font-size: 15px;
         }
 
-        /* Top Header */
         header {
             background: linear-gradient(135deg, #0f172a, #1e3a8a);
             color: #ffffff;
@@ -42,7 +43,7 @@
         }
 
         .brand-slogan {
-            font-size: 12px;
+            font-size: 13px;
             color: #93c5fd;
             font-style: italic;
         }
@@ -55,9 +56,8 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        /* Container & Navigation Controls */
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 20px auto;
             padding: 0 15px;
             width: 100%;
@@ -71,9 +71,13 @@
             margin-bottom: 20px;
         }
 
-        .back-btn {
+        .nav-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .back-btn, .logout-btn {
             display: none;
-            background-color: #0284c7;
             color: white;
             border: none;
             padding: 8px 16px;
@@ -83,7 +87,11 @@
             cursor: pointer;
         }
 
+        .back-btn { background-color: #0284c7; }
         .back-btn:hover { background-color: #0369a1; }
+
+        .logout-btn { background-color: #e11d48; }
+        .logout-btn:hover { background-color: #be123c; }
 
         .page-title {
             font-size: 20px;
@@ -91,19 +99,10 @@
             color: #0f172a;
         }
 
-        /* Dynamic View Switcher */
+        .print-official-header { display: none; }
         .view-panel { display: none; }
-        .view-panel.active {
-            display: block;
-            animation: fadeIn 0.25s ease-in-out;
-        }
+        .view-panel.active { display: block; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Login Grid Layout (For Login + Calendar) */
         .login-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -111,8 +110,7 @@
             align-items: start;
         }
 
-        /* Login Card */
-        .login-card {
+        .login-card, .calendar-card {
             background: #ffffff;
             border-radius: 12px;
             padding: 24px;
@@ -121,13 +119,13 @@
         }
 
         .form-group { margin-bottom: 16px; }
-        .form-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; }
+        .form-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 15px; }
         .form-control {
             width: 100%;
             padding: 10px;
             border: 1px solid #cbd5e1;
             border-radius: 6px;
-            font-size: 14px;
+            font-size: 15px;
             outline: none;
         }
 
@@ -138,19 +136,39 @@
             border: none;
             padding: 10px;
             border-radius: 6px;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
         }
 
-        /* Dashboard Calendar Widget */
-        .calendar-card {
+        .entry-form-card {
             background: #ffffff;
             border-radius: 12px;
-            padding: 20px;
+            padding: 18px;
             border: 1px solid #e2e8f0;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
         }
+
+        .entry-form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            align-items: end;
+        }
+
+        .btn-add {
+            background: #16a34a;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            height: 42px;
+        }
+        .btn-add:hover { background: #15803d; }
 
         .calendar-header {
             display: flex;
@@ -159,14 +177,14 @@
             margin-bottom: 15px;
         }
 
-        .calendar-header h3 { font-size: 16px; color: #0f172a; }
+        .calendar-header h3 { font-size: 17px; color: #0f172a; }
 
         .live-clock {
             background: #e0f2fe;
             color: #0369a1;
             padding: 4px 10px;
             border-radius: 6px;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 700;
             border: 1px solid #bae6fd;
         }
@@ -180,7 +198,7 @@
 
         .calendar-day-head {
             font-weight: 700;
-            font-size: 13px;
+            font-size: 14px;
             color: #64748b;
             padding: 6px 0;
             background: #f1f5f9;
@@ -189,7 +207,7 @@
 
         .calendar-day {
             padding: 8px 0;
-            font-size: 13px;
+            font-size: 14px;
             border-radius: 6px;
             background: #f8fafc;
             color: #334155;
@@ -206,17 +224,16 @@
 
         .calendar-day.empty { background: transparent; border: none; }
 
-        /* Dashboard Grid Cards */
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
+            gap: 16px;
         }
 
         .dash-btn-card {
             background: #ffffff;
             border-radius: 12px;
-            padding: 20px;
+            padding: 16px;
             text-align: center;
             border: 1px solid #e2e8f0;
             cursor: pointer;
@@ -224,24 +241,24 @@
         }
 
         .dash-btn-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             border-color: #38bdf8;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
         .card-icon-box {
-            width: 50px;
-            height: 50px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 12px;
-            font-size: 22px;
+            margin: 0 auto 10px;
+            font-size: 20px;
         }
 
-        .dash-btn-card h3 { font-size: 16px; margin-bottom: 6px; color: #0f172a; }
-        .dash-btn-card p { font-size: 12px; color: #64748b; margin-bottom: 12px; }
+        .dash-btn-card h3 { font-size: 16px; margin-bottom: 4px; color: #0f172a; }
+        .dash-btn-card p { font-size: 12px; color: #64748b; }
 
         .btn-blue .card-icon-box { background: #e0f2fe; color: #0284c7; }
         .btn-green .card-icon-box { background: #dcfce7; color: #16a34a; }
@@ -250,77 +267,158 @@
         .btn-red .card-icon-box { background: #ffe4e6; color: #e11d48; }
         .btn-teal .card-icon-box { background: #ccfbf1; color: #0d9488; }
 
-        /* Data Tables */
+        .card-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .btn-print {
+            background-color: #475569;
+            color: #ffffff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-print:hover { background-color: #334155; }
+
         .data-card {
             background: #ffffff;
             border-radius: 12px;
-            padding: 20px;
+            padding: 16px;
             border: 1px solid #e2e8f0;
             overflow-x: auto;
         }
 
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th { background-color: #f8fafc; color: #475569; padding: 10px 14px; font-size: 13px; text-align: left; border-bottom: 2px solid #e2e8f0; }
-        td { padding: 12px 14px; font-size: 13px; border-bottom: 1px solid #f1f5f9; }
+        table { width: 100%; border-collapse: collapse; margin-top: 6px; }
+        th { background-color: #f8fafc; color: #475569; padding: 10px 12px; font-size: 13px; text-align: left; border-bottom: 2px solid #e2e8f0; }
+        td { padding: 10px 12px; font-size: 13px; border-bottom: 1px solid #f1f5f9; }
         
         .text-right { text-align: right; }
         .text-center { text-align: center; }
 
+        .user-tag {
+            background: #f1f5f9;
+            color: #0284c7;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            border: 1px solid #e2e8f0;
+        }
+
         .total-row { background-color: #e0f2fe; font-weight: bold; color: #0369a1; }
 
-        .badge { padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .badge { padding: 2px 8px; border-radius: 10px; font-size: 12px; font-weight: 600; }
         .badge-paid { background: #dcfce7; color: #15803d; }
-        .badge-due { background: #fee2e2; color: #b91c1c; }
+        .badge-due { background: #fee2e2; color: #dc2626; }
 
         footer {
             text-align: center;
-            padding: 16px;
-            font-size: 12px;
+            padding: 14px;
+            font-size: 13px;
             color: #94a3b8;
             border-top: 1px solid #e2e8f0;
             background: #ffffff;
             margin-top: auto;
         }
+
+        .sync-indicator {
+            font-size: 12px;
+            color: #0284c7;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        @media print {
+            header, .nav-bar, footer, .btn-print, .entry-form-card { 
+                display: none !important; 
+            }
+
+            .print-official-header {
+                display: block !important;
+                text-align: center;
+                border-bottom: 2px solid #0284c7;
+                padding-bottom: 12px;
+                margin-bottom: 16px;
+            }
+
+            .print-official-header h1 {
+                font-size: 24px;
+                color: #0f172a;
+                font-weight: 700;
+            }
+
+            .print-official-header p {
+                font-size: 12px;
+                color: #475569;
+                margin-top: 2px;
+            }
+
+            body { background: white; color: black; }
+            .container { max-width: 100%; margin: 0; padding: 0; }
+            .data-card { border: none; padding: 0; }
+            th, td { border: 1px solid #cbd5e1; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Top Header -->
     <header>
         <div>
             <div class="brand-title"><i class="fa-solid fa-tooth"></i> Dent Craft Lab</div>
             <div class="brand-slogan">"Precision Dental Solutions & Management"</div>
         </div>
         <div class="user-badge" id="user-status-header">
-            <strong style="display:block;">CEO: MD. Bayzid</strong>
-            <span style="font-size: 11px; opacity: 0.8;">Barishal Sadar, Barishal</span>
+            <strong style="display:block;">লগইন করুন</strong>
+            <span style="font-size: 12px; opacity: 0.8;">Barishal Sadar, Barishal</span>
         </div>
     </header>
 
     <div class="container">
-        <!-- Navigation Header -->
-        <div class="nav-bar">
-            <h2 class="page-title" id="current-page-title">সদস্য সিকিউরিটি লগইন</h2>
-            <button class="back-btn" id="back-button" onclick="openPage('home-dashboard')">
-                <i class="fa-solid fa-arrow-left"></i> ড্যাশবোর্ডে ফিরে যান
-            </button>
+
+        <div class="print-official-header">
+            <h1>Dent Craft Lab</h1>
+            <p><strong>Precision Dental Solutions & Management</strong></p>
+            <p>New Circular Road, Barishal Sadar, Barishal | Phone: +880 1700-000000</p>
         </div>
 
-        <!-- ================= 0. MEMBER LOGIN PAGE (WITH LIVE CALENDAR) ================= -->
+        <div class="nav-bar">
+            <div>
+                <h2 class="page-title" id="current-page-title">সদস্য লগইন</h2>
+                <span class="sync-indicator" id="sync-status"><i class="fa-solid fa-cloud"></i> ক্লাউড রেডি</span>
+            </div>
+            <div class="nav-actions">
+                <button class="back-btn" id="back-button" onclick="openPage('home-dashboard')">
+                    <i class="fa-solid fa-arrow-left"></i> ড্যাশবোর্ডে ফিরে যান
+                </button>
+                <button class="logout-btn" id="logout-button" onclick="handleLogout()">
+                    <i class="fa-solid fa-right-from-bracket"></i> লগআউট
+                </button>
+            </div>
+        </div>
+
+        <!-- 0. MEMBER LOGIN PAGE -->
         <div id="login-page" class="view-panel active">
             <div class="login-grid">
-                
-                <!-- Login Form -->
                 <div class="login-card">
                     <h3 style="text-align: center; margin-bottom: 16px; color: #0f172a;">Dent Craft Lab প্যানেল লগইন</h3>
                     <form onsubmit="handleLogin(event)">
                         <div class="form-group">
-                            <label for="member-select">ল্যাব সদস্য নির্বাচন করুন:</label>
+                            <label for="member-select">সদস্যের নাম:</label>
                             <select id="member-select" class="form-control" required>
-                                <option value="">-- মেম্বার নির্বাচন করুন --</option>
-                                <option value="MD. Bayzid (Lab Director)">MD. Bayzid (Lab Director)</option>
-                                <option value="Raiyan Zayed (Dental Tech)">Raiyan Zayed (Dental Tech)</option>
-                                <option value="Maria (Lab Assistant)">Maria (Lab Assistant)</option>
+                                <option value="">সদস্য নির্বাচন করুন</option>
+                                <option value="Bayzid (Founder & CEO)">Bayzid (Founder & CEO)</option>
+                                <option value="Kawser (Founder)">Kawser (Founder)</option>
+                                <option value="Ramim (Founder)">Ramim (Founder)</option>
+                                <option value="Abdul Awal (IT Manager)">Abdul Awal (IT Manager)</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -331,263 +429,282 @@
                     </form>
                 </div>
 
-                <!-- Live Calendar & Clock Widget -->
                 <div class="calendar-card">
                     <div class="calendar-header">
                         <h3><i class="fa-regular fa-calendar-days" style="color:#0284c7;"></i> <span id="calendar-month-year"></span></h3>
                         <span id="current-time-text" class="live-clock"><i class="fa-regular fa-clock"></i> --:--:--</span>
                     </div>
-                    <div class="calendar-grid" id="calendar-days-container">
-                        <!-- Dynamic Live Calendar -->
-                    </div>
+                    <div class="calendar-grid" id="calendar-days-container"></div>
                 </div>
-
             </div>
         </div>
 
-        <!-- ================= 1. HOME DASHBOARD ================= -->
+        <!-- 1. HOME DASHBOARD -->
         <div id="home-dashboard" class="view-panel">
             <div class="dashboard-grid">
-                
                 <div class="dash-btn-card btn-teal" onclick="openPage('daily-ledger-page')">
                     <div class="card-icon-box"><i class="fa-solid fa-book-open"></i></div>
-                    <h3>ডেইলি লেজার (Daily Ledger)</h3>
-                    <p>দৈনিক ডেন্টাল সার্ভিস বিলিং ও রোগী ইনকামের তালিকা</p>
+                    <h3>ডেইলি লেজার</h3>
+                    <p>সার্ভিস বিলিং ও আয়</p>
                 </div>
 
                 <div class="dash-btn-card btn-red" onclick="openPage('daily-expense-page')">
                     <div class="card-icon-box"><i class="fa-solid fa-receipt"></i></div>
-                    <h3>ডেইলি এক্সপেন্স (Daily Expenses)</h3>
-                    <p>দৈনন্দিন খুচরা খরচ ও ল্যাব মেইনটেন্যান্স খরচ</p>
+                    <h3>ডেইলি এক্সপেন্স</h3>
+                    <p>খুচরা ও মেইনটেন্যান্স খরচ</p>
                 </div>
 
                 <div class="dash-btn-card btn-blue" onclick="openPage('overview-page')">
                     <div class="card-icon-box"><i class="fa-solid fa-chart-pie"></i></div>
                     <h3>ল্যাব ওভারভিউ</h3>
-                    <p>Dent Craft Lab-এর মোট জমা ও সার্বিক খরচের চিত্র</p>
+                    <p>মোট জমা ও সার্বিক খরচ</p>
                 </div>
 
                 <div class="dash-btn-card btn-green" onclick="openPage('members-page')">
                     <div class="card-icon-box"><i class="fa-solid fa-users"></i></div>
-                    <h3>সদস্য ও শেয়ার রেজিস্টার</h3>
-                    <p>ল্যাব পার্টনারদের শেয়ার ও ফান্ড জমার হিসাব</p>
+                    <h3>সদস্য ও শেয়ার</h3>
+                    <p>পার্টনার ও ফান্ড রেজিস্টার</p>
                 </div>
 
                 <div class="dash-btn-card btn-amber" onclick="openPage('bank-page')">
                     <div class="card-icon-box"><i class="fa-solid fa-building-columns"></i></div>
-                    <h3>ব্যাংক ও ম্যাটেরিয়াল খরচ</h3>
-                    <p>ল্যাব অ্যাকাউন্ট ও ডেন্টাল ম্যাটেরিয়াল কেনাকাটা</p>
+                    <h3>ব্যাংক ও ম্যাটেরিয়াল</h3>
+                    <p>অ্যাকাউন্ট ও সরঞ্জাম কেনাকাটা</p>
                 </div>
 
                 <div class="dash-btn-card btn-purple" onclick="openPage('profit-page')">
                     <div class="card-icon-box"><i class="fa-solid fa-wallet"></i></div>
                     <h3>লাভ-ক্ষতির হিসাব</h3>
-                    <p>ল্যাব কাজের মোট আয় ও নিট মুনাফা</p>
+                    <p>ল্যাব আয় ও নিট মুনাফা</p>
                 </div>
-
             </div>
         </div>
 
-        <!-- ================= DAILY LEDGER PAGE ================= -->
+        <!-- DAILY LEDGER PAGE -->
         <div id="daily-ledger-page" class="view-panel">
+            <div class="entry-form-card">
+                <h4 style="margin-bottom: 12px; color: #0284c7;"><i class="fa-solid fa-plus-circle"></i> নতুন লেজার / আয় এন্ট্রি যুক্ত করুন</h4>
+                <form onsubmit="addLedgerEntry(event)" class="entry-form-grid">
+                    <div>
+                        <label>তারিখ:</label>
+                        <input type="date" id="ledger-date" class="form-control" required>
+                    </div>
+                    <div>
+                        <label>ডেন্টাল ক্লিনিকের নাম:</label>
+                        <input type="text" id="ledger-clinic" class="form-control" placeholder="ক্লিনিকের নাম" required>
+                    </div>
+                    <div>
+                        <label>সার্ভিসের বিবরণ:</label>
+                        <input type="text" id="ledger-service" class="form-control" placeholder="কাজের বিবরণ" required>
+                    </div>
+                    <div>
+                        <label>বিল পরিমাণ (৳):</label>
+                        <input type="number" id="ledger-amount" class="form-control" placeholder="টাকা" required>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn-add" style="width: 100%;"><i class="fa-solid fa-plus"></i> যোগ করুন</button>
+                    </div>
+                </form>
+            </div>
+
             <div class="data-card">
-                <h3 style="margin-bottom: 16px; color: #0f172a;">দৈনিক আয় / লেজার খাতা (Daily Income Ledger)</h3>
+                <div class="card-header-bar">
+                    <h3 style="color: #0f172a;">দৈনিক আয় / লেজার খাতা (Daily Income Ledger)</h3>
+                    <button class="btn-print" onclick="window.print()"><i class="fa-solid fa-print"></i> প্রিন্ট</button>
+                </div>
                 <table>
                     <thead>
-                        <tr>
-                            <th>তারিখ</th>
-                            <th>রোগী / ডেন্টাল ক্লিনিকের নাম</th>
-                            <th>সার্ভিসের বিবরণ</th>
-                            <th class="text-right">বিল পরিমাণ (৳)</th>
-                        </tr>
+                        <tr><th>তারিখ</th><th>ডেন্টাল ক্লিনিকের নাম</th><th>সার্ভিসের বিবরণ</th><th class="text-right">বিল পরিমাণ (৳)</th><th class="text-center">এন্ট্রি বাই (User)</th></tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>২২/০৯/২০২৬</td>
-                            <td>সিটি ডেন্টাল কেয়ার</td>
-                            <td>২টি জেরকোনিয়া ক্রাউন (Zirconia Crown)</td>
-                            <td class="text-right">৮,০০০</td>
-                        </tr>
-                        <tr>
-                            <td>২৩/০৯/২০২৬</td>
-                            <td>ডঃ জসিম উদ্দিন</td>
-                            <td>কমপ্লিট ডেনচার সেটিং (Complete Denture)</td>
-                            <td class="text-right">১২,০০০</td>
-                        </tr>
-                        <tr class="total-row">
-                            <td colspan="3" class="text-right">সর্বমোট লেজার আয়:</td>
-                            <td class="text-right">৳ ২০,০০০</td>
-                        </tr>
-                    </tbody>
+                    <tbody id="ledger-table-body"></tbody>
+                    <tfoot>
+                        <tr class="total-row"><td colspan="3" class="text-right">সর্বমোট লেজার আয়:</td><td class="text-right" id="ledger-total">৳ ০</td><td></td></tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
 
-        <!-- ================= DAILY EXPENSE PAGE ================= -->
+        <!-- DAILY EXPENSE PAGE -->
         <div id="daily-expense-page" class="view-panel">
+            <div class="entry-form-card">
+                <h4 style="margin-bottom: 12px; color: #e11d48;"><i class="fa-solid fa-plus-circle"></i> নতুন দৈনিক খরচ এন্ট্রি যুক্ত করুন</h4>
+                <form onsubmit="addExpenseEntry(event)" class="entry-form-grid">
+                    <div>
+                        <label>তারিখ:</label>
+                        <input type="date" id="expense-date" class="form-control" required>
+                    </div>
+                    <div>
+                        <label>খরচের খাত:</label>
+                        <input type="text" id="expense-sector" class="form-control" placeholder="খাতের নাম" required>
+                    </div>
+                    <div>
+                        <label>গ্রহণকারী / স্থান:</label>
+                        <input type="text" id="expense-payee" class="form-control" placeholder="বিবরণ" required>
+                    </div>
+                    <div>
+                        <label>পরিমাণ (৳):</label>
+                        <input type="number" id="expense-amount" class="form-control" placeholder="টাকা" required>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn-add" style="width: 100%; background: #e11d48;"><i class="fa-solid fa-plus"></i> যোগ করুন</button>
+                    </div>
+                </form>
+            </div>
+
             <div class="data-card">
-                <h3 style="margin-bottom: 16px; color: #0f172a;">দৈনন্দিন খুচরা খরচ (Daily Expenses)</h3>
+                <div class="card-header-bar">
+                    <h3 style="color: #0f172a;">দৈনন্দিন খুচরা খরচ (Daily Expenses)</h3>
+                    <button class="btn-print" onclick="window.print()"><i class="fa-solid fa-print"></i> প্রিন্ট</button>
+                </div>
                 <table>
                     <thead>
-                        <tr>
-                            <th>তারিখ</th>
-                            <th>খরচের খাত</th>
-                            <th>গ্রহণকারী / স্থান</th>
-                            <th class="text-right">পরিমাণ (৳)</th>
-                        </tr>
+                        <tr><th>তারিখ</th><th>খরচের খাত</th><th>গ্রহণকারী / স্থান</th><th class="text-right">পরিমাণ (৳)</th><th class="text-center">এন্ট্রি বাই (User)</th></tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>২২/০৯/২০২৬</td>
-                            <td>ল্যাব টি-ব্রেক ও স্ন্যাকস</td>
-                            <td>স্টাফ খরচ</td>
-                            <td class="text-right">৩৫০</td>
-                        </tr>
-                        <tr>
-                            <td>২৩/০৯/২০২৬</td>
-                            <td>ডেলিভারি বয় লোকাল ট্রান্সপোর্ট</td>
-                            <td>ক্লিনিক ডেলিভারি</td>
-                            <td class="text-right">২০০</td>
-                        </tr>
-                        <tr class="total-row">
-                            <td colspan="3" class="text-right">সর্বমোট দৈনিক খরচ:</td>
-                            <td class="text-right">৳ ৫৫০</td>
-                        </tr>
-                    </tbody>
+                    <tbody id="expense-table-body"></tbody>
+                    <tfoot>
+                        <tr class="total-row"><td colspan="3" class="text-right">সর্বমোট দৈনিক খরচ:</td><td class="text-right" id="expense-total">৳ ০</td><td></td></tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
 
-        <!-- ================= PAGE: OVERVIEW ================= -->
+        <!-- OVERVIEW PAGE -->
         <div id="overview-page" class="view-panel">
+            <div class="entry-form-card">
+                <h4 style="margin-bottom: 12px; color: #0284c7;"><i class="fa-solid fa-plus-circle"></i> নতুন অর্থায়ন খাত যুক্ত করুন</h4>
+                <form onsubmit="addOverviewEntry(event)" class="entry-form-grid">
+                    <div style="grid-column: span 2;">
+                        <label>খাত (Financial Category):</label>
+                        <input type="text" id="overview-category" class="form-control" placeholder="খাতের বিবরণ" required>
+                    </div>
+                    <div>
+                        <label>পরিমাণ (৳):</label>
+                        <input type="number" id="overview-amount" class="form-control" placeholder="টাকা" required>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn-add" style="width: 100%;"><i class="fa-solid fa-plus"></i> যোগ করুন</button>
+                    </div>
+                </form>
+            </div>
+
             <div class="data-card">
-                <h3 style="margin-bottom: 16px; color: #0f172a;">Dent Craft Lab - সার্বিক অর্থায়ন</h3>
+                <div class="card-header-bar">
+                    <h3 style="color: #0f172a;">Dent Craft Lab - সার্বিক অর্থায়ন</h3>
+                    <button class="btn-print" onclick="window.print()"><i class="fa-solid fa-print"></i> প্রিন্ট</button>
+                </div>
                 <table>
                     <thead>
-                        <tr>
-                            <th>খাত (Financial Category)</th>
-                            <th class="text-right">পরিমাণ (৳)</th>
-                        </tr>
+                        <tr><th>খাত (Financial Category)</th><th class="text-right">পরিমাণ (৳)</th><th class="text-center">এন্ট্রি বাই (User)</th></tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>মোট ল্যাব মূলধন ফান্ড (Total Lab Capital)</td>
-                            <td class="text-right">৳ ২,৪৫,০০০</td>
-                        </tr>
-                        <tr>
-                            <td>ব্যাংক রিজার্ভ (Mutual Trust Bank)</td>
-                            <td class="text-right" style="color: #16a34a; font-weight:600;">৳ ১,৯৫,০০০</td>
-                        </tr>
-                        <tr>
-                            <td>সদস্যদের বকেয়া চাঁদা (Partner Dues)</td>
-                            <td class="text-right" style="color: #dc2626; font-weight:600;">৳ ৫০,০০০</td>
-                        </tr>
-                        <tr>
-                            <td>ডেন্টাল ম্যাটেরিয়াল ও ল্যাব খরচ (Total Expenses)</td>
-                            <td class="text-right" style="color: #d97706; font-weight:600;">৳ ৮৫,০০০</td>
-                        </tr>
-                    </tbody>
+                    <tbody id="overview-table-body"></tbody>
                 </table>
             </div>
         </div>
 
-        <!-- ================= PAGE: MEMBERS LEDGER ================= -->
+        <!-- MEMBERS LEDGER PAGE -->
         <div id="members-page" class="view-panel">
+            <div class="entry-form-card">
+                <h4 style="margin-bottom: 12px; color: #16a34a;"><i class="fa-solid fa-user-plus"></i> নতুন সদস্য / পার্টনার যুক্ত করুন</h4>
+                <form onsubmit="addMemberEntry(event)" class="entry-form-grid">
+                    <div>
+                        <label>সদস্যের নাম:</label>
+                        <input type="text" id="member-name" class="form-control" placeholder="নাম" required>
+                    </div>
+                    <div>
+                        <label>শেয়ার সংখ্যা:</label>
+                        <input type="text" id="member-share" class="form-control" placeholder="যেমন: ১টি" required>
+                    </div>
+                    <div>
+                        <label>মোট ফান্ড (৳):</label>
+                        <input type="number" id="member-fund" class="form-control" placeholder="টাকা" required>
+                    </div>
+                    <div>
+                        <label>বকেয়া (৳):</label>
+                        <input type="number" id="member-dues" class="form-control" placeholder="টাকা" value="0" required>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn-add" style="width: 100%;"><i class="fa-solid fa-plus"></i> যোগ করুন</button>
+                    </div>
+                </form>
+            </div>
+
             <div class="data-card">
-                <h3 style="margin-bottom: 16px; color: #0f172a;">ল্যাব শেয়ারহোল্ডার ও পার্টনার রেজিস্টার</h3>
+                <div class="card-header-bar">
+                    <h3 style="color: #0f172a;">ল্যাব শেয়ারহোল্ডার ও পার্টনার রেজিস্টার</h3>
+                    <button class="btn-print" onclick="window.print()"><i class="fa-solid fa-print"></i> প্রিন্ট</button>
+                </div>
                 <table>
                     <thead>
-                        <tr>
-                            <th>সদস্যের নাম</th>
-                            <th>শেয়ার সংখ্যা</th>
-                            <th class="text-right">মোট ফান্ড জমা (৳)</th>
-                            <th class="text-right">বকেয়া (৳)</th>
-                            <th class="text-center">স্ট্যাটাস</th>
-                        </tr>
+                        <tr><th>সদস্যের নাম</th><th>শেয়ার</th><th class="text-right">মোট ফান্ড (৳)</th><th class="text-right">বকেয়া (৳)</th><th class="text-center">স্ট্যাটাস</th><th class="text-center">এন্ট্রি বাই (User)</th></tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>MD. Bayzid</td>
-                            <td>২টি</td>
-                            <td class="text-right">২০,০০০</td>
-                            <td class="text-right">০</td>
-                            <td class="text-center"><span class="badge badge-paid">পরিশোধিত</span></td>
-                        </tr>
-                        <tr>
-                            <td>Raiyan Zayed</td>
-                            <td>১টি</td>
-                            <td class="text-right">১০,০০০</td>
-                            <td class="text-right">২,০০০</td>
-                            <td class="text-center"><span class="badge badge-due">বাকি ২,০০০</span></td>
-                        </tr>
-                        <tr>
-                            <td>Maria</td>
-                            <td>১টি</td>
-                            <td class="text-right">১০,০০০</td>
-                            <td class="text-right">০</td>
-                            <td class="text-center"><span class="badge badge-paid">পরিশোধিত</span></td>
-                        </tr>
-                    </tbody>
+                    <tbody id="member-table-body"></tbody>
                 </table>
             </div>
         </div>
 
-        <!-- ================= PAGE: BANK & ASSETS ================= -->
+        <!-- BANK & ASSETS PAGE -->
         <div id="bank-page" class="view-panel">
+            <div class="entry-form-card">
+                <h4 style="margin-bottom: 12px; color: #d97706;"><i class="fa-solid fa-plus-circle"></i> নতুন কেনাকাটা / ব্যাংক লেনদেন এন্ট্রি</h4>
+                <form onsubmit="addBankEntry(event)" class="entry-form-grid">
+                    <div>
+                        <label>তারিখ:</label>
+                        <input type="date" id="bank-date" class="form-control" required>
+                    </div>
+                    <div>
+                        <label>বিবরণ / খাত:</label>
+                        <input type="text" id="bank-desc" class="form-control" placeholder="সরঞ্জাম বা খাতের বিবরণ" required>
+                    </div>
+                    <div>
+                        <label>পেমেন্ট মাধ্যম:</label>
+                        <select id="bank-method" class="form-control">
+                            <option value="ব্যাংক ট্র্যান্সফার">ব্যাংক ট্র্যান্সফার</option>
+                            <option value="নগদ (Cash)">নগদ (Cash)</option>
+                            <option value="মোবাইল ব্যাংকিং">মোবাইল ব্যাংকিং</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>পরিমাণ (৳):</label>
+                        <input type="number" id="bank-amount" class="form-control" placeholder="টাকা" required>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn-add" style="width: 100%; background-color: #d97706;"><i class="fa-solid fa-plus"></i> যোগ করুন</button>
+                    </div>
+                </form>
+            </div>
+
             <div class="data-card">
-                <h3 style="margin-bottom: 12px; color: #0f172a;">ব্যাংক লেনদেন ও ডেন্টাল ইকুইপমেন্ট ক্রয়</h3>
-                <p style="margin-bottom: 12px; font-size: 13px; color: #475569;">
+                <div class="card-header-bar">
+                    <h3 style="color: #0f172a;">ব্যাংক লেনদেন ও ইকুইপমেন্ট ক্রয়</h3>
+                    <button class="btn-print" onclick="window.print()"><i class="fa-solid fa-print"></i> প্রিন্ট</button>
+                </div>
+                <p style="margin-bottom: 10px; font-size: 13px; color: #475569;">
                     <strong>ব্যাংক অ্যাকাউন্ট:</strong> Dent Craft Lab Operations | <strong>ব্যাংক:</strong> Mutual Trust Bank
                 </p>
                 <table>
                     <thead>
-                        <tr>
-                            <th>তারিখ</th>
-                            <th>বিবরণ / খাত</th>
-                            <th>পেমেন্ট মাধ্যম</th>
-                            <th class="text-right">পরিমাণ (৳)</th>
-                        </tr>
+                        <tr><th>তারিখ</th><th>বিবরণ / খাত</th><th>পেমেন্ট মাধ্যম</th><th class="text-right">পরিমাণ (৳)</th><th class="text-center">এন্ট্রি বাই (User)</th></tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>০৫/০৯/২০২৬</td>
-                            <td>ডেন্টাল মাইক্রোমোটর ও টুলস ক্রয়</td>
-                            <td>ব্যাংক ট্র্যান্সফার</td>
-                            <td class="text-right">৬০,০০০</td>
-                        </tr>
-                        <tr>
-                            <td>১০/০৯/২০২৬</td>
-                            <td>মেডিকেল গ্রেড ডেন্টাল সিরামিক ও রেজিন</td>
-                            <td>নগদ (Cash)</td>
-                            <td class="text-right">২৫,০০০</td>
-                        </tr>
-                        <tr class="total-row">
-                            <td colspan="3" class="text-right">মোট খরচের পরিমাণ:</td>
-                            <td class="text-right">৳ ৮৫,০০০</td>
-                        </tr>
-                    </tbody>
+                    <tbody id="bank-table-body"></tbody>
+                    <tfoot>
+                        <tr class="total-row"><td colspan="3" class="text-right">মোট খরচ:</td><td class="text-right" id="bank-total">৳ ০</td><td></td></tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
 
-        <!-- ================= PAGE: PROFIT & LOSS ================= -->
+        <!-- PROFIT & LOSS PAGE -->
         <div id="profit-page" class="view-panel">
             <div class="data-card">
-                <h3 style="margin-bottom: 16px; color: #0f172a;">Dent Craft Lab - নিট মুনাফা বিশ্লেষণ</h3>
+                <div class="card-header-bar">
+                    <h3 style="color: #0f172a;">Dent Craft Lab - নিট মুনাফা বিশ্লেষণ</h3>
+                    <button class="btn-print" onclick="window.print()"><i class="fa-solid fa-print"></i> প্রিন্ট</button>
+                </div>
                 <table>
                     <tbody>
-                        <tr>
-                            <td><strong>মোট সার্ভিস আয় (Lab Revenue)</strong></td>
-                            <td class="text-right" style="font-weight: bold; font-size: 15px;">৳ ২,৪৫,০০০</td>
-                        </tr>
-                        <tr>
-                            <td><strong>বাদ: পরিচালন ও ইকুইপমেন্ট খরচ (Operating Expenses)</strong></td>
-                            <td class="text-right" style="font-weight: bold; color: #dc2626; font-size: 15px;">(-) ৳ ৮৫,০০০</td>
-                        </tr>
-                        <tr class="total-row" style="font-size: 15px;">
-                            <td><strong>খুচরা নিট মুনাফা (Net Profit)</strong></td>
-                            <td class="text-right" style="font-weight: bold; color: #16a34a;">৳ ১,৬০,০০০</td>
-                        </tr>
+                        <tr><td><strong>মোট সার্ভিস আয় (Total Revenue)</strong></td><td class="text-right" style="font-weight: bold;" id="profit-revenue">৳ ০</td></tr>
+                        <tr><td><strong>বাদ: মোট পরিচালন ও খরচের খাত (Total Expenses)</strong></td><td class="text-right" style="font-weight: bold; color: #dc2626;" id="profit-expenses">(-) ৳ ০</td></tr>
+                        <tr class="total-row"><td><strong>নিট মুনাফা (Net Profit)</strong></td><td class="text-right" style="font-weight: bold; color: #16a34a;" id="profit-net">৳ ০</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -595,27 +712,29 @@
 
     </div>
 
-    <!-- Footer -->
     <footer>
-      <div>
-         <div>Dent Craft Lab — New Circular Road, Barishal Sadar, Barishal | Precision Dental Solutions </div>
-         <div>© 2026, Dent Craf  Lab</div>
-        <div>Developer: Abdul Awal, Dubai, UAE</div>
-          </div>
+        <div>Dent Craft Lab — New Circular Road, Barishal Sadar, Barishal | Precision Dental Solutions</div>
+        <div style="margin-top: 4px;">© 2026, Dent Craft Lab | Developer: Abdul Awal, Dubai, UAE</div>
     </footer>
 
-    <!-- Live Clock & Calendar Logic -->
     <script>
+        // আপনার গুগল অ্যাপস স্ক্রিপ্ট ডিপ্লয়মেন্ট লিঙ্কটি নিচে বসান
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw6Ohij_Ztbj_FI9g9M24AeGJN7hprQd9ENsHsrKwZqBIeSoVF0Jrk6iqnWa8OfTykY8Q/exec";
+
+        const userCredentials = {
+            "Bayzid (Founder & CEO)": "100123",
+            "Kawser (Founder)": "100234",
+            "Ramim (Founder)": "100345",
+            "Abdul Awal (IT Manager)": "100456"
+        };
+
+        let loggedInUser = null;
         let lastRenderedDate = null;
 
-        // Function to update Live Clock & Render Calendar dynamically
         function updateLiveClockAndCalendar() {
             const now = new Date();
-
-            // 1. Live Clock Update (Bengali Numerals Format)
             document.getElementById('current-time-text').innerHTML = `<i class="fa-regular fa-clock"></i> ${now.toLocaleTimeString('bn-BD')}`;
 
-            // 2. Calendar Auto-Refresh Logic (Checks if day or month changed)
             const currentDateKey = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
             if (lastRenderedDate !== currentDateKey) {
                 renderCalendar(now);
@@ -623,11 +742,9 @@
             }
         }
 
-        // Render Calendar Grid
         function renderCalendar(now) {
             const year = now.getFullYear();
             const month = now.getMonth();
-
             const monthNames = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
             const dayHeadings = ["রবি", "সোম", "মঙ্গল", "বুধ", "বৃহঃ", "শুক্র", "শনি"];
 
@@ -635,11 +752,9 @@
 
             const firstDay = new Date(year, month, 1).getDay();
             const daysInMonth = new Date(year, month + 1, 0).getDate();
-
             const container = document.getElementById('calendar-days-container');
             container.innerHTML = '';
 
-            // Day Headers
             dayHeadings.forEach(day => {
                 const dayHeadDiv = document.createElement('div');
                 dayHeadDiv.className = 'calendar-day-head';
@@ -647,14 +762,12 @@
                 container.appendChild(dayHeadDiv);
             });
 
-            // Empty Slots before day 1
             for (let i = 0; i < firstDay; i++) {
                 const emptyDiv = document.createElement('div');
                 emptyDiv.className = 'calendar-day empty';
                 container.appendChild(emptyDiv);
             }
 
-            // Days of Current Month
             const todayDate = now.getDate();
             for (let day = 1; day <= daysInMonth; day++) {
                 const dayDiv = document.createElement('div');
@@ -664,47 +777,317 @@
             }
         }
 
-        // Login Handler
         function handleLogin(e) {
             e.preventDefault();
             const memberName = document.getElementById('member-select').value;
             const pin = document.getElementById('pin-input').value;
 
-            if (memberName && pin) {
+            if (!memberName) {
+                alert("অনুগ্রহ করে সদস্য নির্বাচন করুন!");
+                return;
+            }
+
+            if (userCredentials[memberName] === pin) {
+                loggedInUser = memberName;
                 document.getElementById('user-status-header').innerHTML = `
-                    <strong style="display:block;">${memberName}</strong>
+                    <strong style="display:block;">${loggedInUser}</strong>
                     <span style="font-size: 11px; color: #38bdf8;">সক্রিয় সদস্য</span>
                 `;
+                document.getElementById('pin-input').value = '';
                 openPage('home-dashboard');
+                fetchAllDataFromSheet();
+            } else {
+                alert("ভুল সিকিউরিটি পিন! সঠিক পিন দিয়ে আবার চেষ্টা করুন।");
             }
         }
 
-        // Navigation Switcher
+        function handleLogout() {
+            loggedInUser = null;
+            document.getElementById('user-status-header').innerHTML = `
+                <strong style="display:block;">লগইন করুন</strong>
+                <span style="font-size: 12px; opacity: 0.8;">Barishal Sadar, Barishal</span>
+            `;
+            openPage('login-page');
+        }
+
         function openPage(pageId) {
             document.querySelectorAll('.view-panel').forEach(panel => panel.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
 
             const backBtn = document.getElementById('back-button');
+            const logoutBtn = document.getElementById('logout-button');
             const pageTitle = document.getElementById('current-page-title');
 
             if (pageId === 'login-page') {
                 backBtn.style.display = 'none';
-                pageTitle.innerText = "সদস্য সিকিউরিটি লগইন";
+                logoutBtn.style.display = 'none';
+                pageTitle.innerText = "সদস্য লগইন";
             } else if (pageId === 'home-dashboard') {
                 backBtn.style.display = 'none';
-                pageTitle.innerText = "মূল ড্যাশবোর্ড (Home Dashboard)";
+                logoutBtn.style.display = 'inline-block';
+                pageTitle.innerText = "ড্যাশবোর্ড (Dashboard)";
             } else {
                 backBtn.style.display = 'inline-block';
+                logoutBtn.style.display = 'inline-block';
                 if (pageId === 'daily-ledger-page') pageTitle.innerText = "ডেইলি লেজার (Daily Income)";
                 else if (pageId === 'daily-expense-page') pageTitle.innerText = "ডেইলি এক্সপেন্স (Daily Expenses)";
                 else if (pageId === 'overview-page') pageTitle.innerText = "ল্যাব ওভারভিউ";
                 else if (pageId === 'members-page') pageTitle.innerText = "সদস্য ও শেয়ার রেজিস্টার";
                 else if (pageId === 'bank-page') pageTitle.innerText = "ব্যাংক ও ম্যাটেরিয়াল খরচ";
-                else if (pageId === 'profit-page') pageTitle.innerText = "লাভ-ক্ষতির হিসাব";
+                else if (pageId === 'profit-page') {
+                    pageTitle.innerText = "লাভ-ক্ষতির হিসাব";
+                    updateProfitLossPage();
+                }
             }
         }
 
-        // Initialize Live Clock and Start Interval (Every 1 Second)
+        function formatDate(dateStr) {
+            if(!dateStr) return '';
+            const parts = dateStr.split('-');
+            return `${parts[2]}/${parts[1]}/${parts[0]}`;
+        }
+
+        function getCurrentUserShortName() {
+            if(!loggedInUser) return "System";
+            return loggedInUser.split(' ')[0] + ' ' + loggedInUser.split(' ')[1];
+        }
+
+        function updateSyncStatus(status) {
+            const el = document.getElementById('sync-status');
+            if(status === 'saving') {
+                el.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...`;
+            } else if(status === 'loading') {
+                el.innerHTML = `<i class="fa-solid fa-cloud-arrow-down fa-bounce"></i> ডাটা সিঙ্ক হচ্ছে...`;
+            } else {
+                el.innerHTML = `<i class="fa-solid fa-cloud"></i> ক্লাউড সিঙ্কড`;
+            }
+        }
+
+        // --- GOOGLE SHEET SYNCING LOGIC ---
+
+        async function saveToSheet(sheetName, rowData) {
+            if (SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE") {
+                alert("অনুগ্রহ করে অ্যাপসে আপনার Google Apps Script URL সেট করুন।");
+                return false;
+            }
+            updateSyncStatus('saving');
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sheet: sheetName, row: rowData })
+                });
+                updateSyncStatus('ready');
+                return true;
+            } catch (err) {
+                console.error(err);
+                alert("ডাটা সেভ করতে সমস্যা হয়েছে। ইন্টারনেট কানেকশন চেক করুন।");
+                updateSyncStatus('ready');
+                return false;
+            }
+        }
+
+        async function fetchAllDataFromSheet() {
+            if (SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE") return;
+            updateSyncStatus('loading');
+            try {
+                const res = await fetch(SCRIPT_URL);
+                const data = await res.json();
+
+                renderLedgerTable(data.Ledger || []);
+                renderExpenseTable(data.Expense || []);
+                renderOverviewTable(data.Overview || []);
+                renderMemberTable(data.Members || []);
+                renderBankTable(data.Bank || []);
+
+                updateSyncStatus('ready');
+            } catch(err) {
+                console.error(err);
+                updateSyncStatus('ready');
+            }
+        }
+
+        // --- RENDER TABLES ---
+
+        function renderLedgerTable(rows) {
+            const tbody = document.getElementById('ledger-table-body');
+            tbody.innerHTML = '';
+            rows.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="text-right">${r[3]}</td><td class="text-center"><span class="user-tag"><i class="fa-regular fa-user"></i> ${r[4]}</span></td>`;
+                tbody.appendChild(tr);
+            });
+            calculateLedgerTotal();
+        }
+
+        function renderExpenseTable(rows) {
+            const tbody = document.getElementById('expense-table-body');
+            tbody.innerHTML = '';
+            rows.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="text-right">${r[3]}</td><td class="text-center"><span class="user-tag"><i class="fa-regular fa-user"></i> ${r[4]}</span></td>`;
+                tbody.appendChild(tr);
+            });
+            calculateExpenseTotal();
+        }
+
+        function renderOverviewTable(rows) {
+            const tbody = document.getElementById('overview-table-body');
+            tbody.innerHTML = '';
+            rows.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${r[0]}</td><td class="text-right">${r[1]}</td><td class="text-center"><span class="user-tag"><i class="fa-regular fa-user"></i> ${r[2]}</span></td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderMemberTable(rows) {
+            const tbody = document.getElementById('member-table-body');
+            tbody.innerHTML = '';
+            rows.forEach(r => {
+                const dues = parseFloat(r[3]) || 0;
+                const statusBadge = dues > 0 ? `<span class="badge badge-due">বকেয়া</span>` : `<span class="badge badge-paid">পরিশোধিত</span>`;
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${r[0]}</td><td>${r[1]}</td><td class="text-right">${Number(r[2]).toLocaleString('bn-BD')}</td><td class="text-right">${Number(r[3]).toLocaleString('bn-BD')}</td><td class="text-center">${statusBadge}</td><td class="text-center"><span class="user-tag"><i class="fa-regular fa-user"></i> ${r[4]}</span></td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderBankTable(rows) {
+            const tbody = document.getElementById('bank-table-body');
+            tbody.innerHTML = '';
+            rows.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="text-right">${r[3]}</td><td class="text-center"><span class="user-tag"><i class="fa-regular fa-user"></i> ${r[4]}</span></td>`;
+                tbody.appendChild(tr);
+            });
+            calculateBankTotal();
+        }
+
+        // --- FORM SUBMIT HANDLERS ---
+
+        async function addLedgerEntry(e) {
+            e.preventDefault();
+            const date = formatDate(document.getElementById('ledger-date').value);
+            const clinic = document.getElementById('ledger-clinic').value;
+            const service = document.getElementById('ledger-service').value;
+            const amount = parseFloat(document.getElementById('ledger-amount').value);
+            const userTag = getCurrentUserShortName();
+
+            const rowData = [date, clinic, service, amount, userTag];
+            e.target.reset();
+            
+            await saveToSheet('Ledger', rowData);
+            setTimeout(fetchAllDataFromSheet, 1000);
+        }
+
+        async function addExpenseEntry(e) {
+            e.preventDefault();
+            const date = formatDate(document.getElementById('expense-date').value);
+            const sector = document.getElementById('expense-sector').value;
+            const payee = document.getElementById('expense-payee').value;
+            const amount = parseFloat(document.getElementById('expense-amount').value);
+            const userTag = getCurrentUserShortName();
+
+            const rowData = [date, sector, payee, amount, userTag];
+            e.target.reset();
+
+            await saveToSheet('Expense', rowData);
+            setTimeout(fetchAllDataFromSheet, 1000);
+        }
+
+        async function addOverviewEntry(e) {
+            e.preventDefault();
+            const cat = document.getElementById('overview-category').value;
+            const amount = parseFloat(document.getElementById('overview-amount').value);
+            const userTag = getCurrentUserShortName();
+
+            const rowData = [cat, amount, userTag];
+            e.target.reset();
+
+            await saveToSheet('Overview', rowData);
+            setTimeout(fetchAllDataFromSheet, 1000);
+        }
+
+        async function addMemberEntry(e) {
+            e.preventDefault();
+            const name = document.getElementById('member-name').value;
+            const share = document.getElementById('member-share').value;
+            const fund = parseFloat(document.getElementById('member-fund').value);
+            const dues = parseFloat(document.getElementById('member-dues').value);
+            const userTag = getCurrentUserShortName();
+
+            const rowData = [name, share, fund, dues, userTag];
+            e.target.reset();
+
+            await saveToSheet('Members', rowData);
+            setTimeout(fetchAllDataFromSheet, 1000);
+        }
+
+        async function addBankEntry(e) {
+            e.preventDefault();
+            const date = formatDate(document.getElementById('bank-date').value);
+            const desc = document.getElementById('bank-desc').value;
+            const method = document.getElementById('bank-method').value;
+            const amount = parseFloat(document.getElementById('bank-amount').value);
+            const userTag = getCurrentUserShortName();
+
+            const rowData = [date, desc, method, amount, userTag];
+            e.target.reset();
+
+            await saveToSheet('Bank', rowData);
+            setTimeout(fetchAllDataFromSheet, 1000);
+        }
+
+        // --- CALCULATIONS ---
+
+        function calculateLedgerTotal() {
+            let total = 0;
+            document.querySelectorAll('#ledger-table-body tr').forEach(tr => {
+                if(tr.children[3]) {
+                    const val = parseFloat(tr.children[3].innerText.replace(/,/g, '')) || 0;
+                    total += val;
+                }
+            });
+            document.getElementById('ledger-total').innerText = '৳ ' + total.toLocaleString('bn-BD');
+            return total;
+        }
+
+        function calculateExpenseTotal() {
+            let total = 0;
+            document.querySelectorAll('#expense-table-body tr').forEach(tr => {
+                if(tr.children[3]) {
+                    const val = parseFloat(tr.children[3].innerText.replace(/,/g, '')) || 0;
+                    total += val;
+                }
+            });
+            document.getElementById('expense-total').innerText = '৳ ' + total.toLocaleString('bn-BD');
+            return total;
+        }
+
+        function calculateBankTotal() {
+            let total = 0;
+            document.querySelectorAll('#bank-table-body tr').forEach(tr => {
+                if(tr.children[3]) {
+                    const val = parseFloat(tr.children[3].innerText.replace(/,/g, '')) || 0;
+                    total += val;
+                }
+            });
+            document.getElementById('bank-total').innerText = '৳ ' + total.toLocaleString('bn-BD');
+            return total;
+        }
+
+        function updateProfitLossPage() {
+            const totalIncome = calculateLedgerTotal();
+            const totalExpense = calculateExpenseTotal();
+            const netProfit = totalIncome - totalExpense;
+
+            document.getElementById('profit-revenue').innerText = '৳ ' + totalIncome.toLocaleString('bn-BD');
+            document.getElementById('profit-expenses').innerText = '(-) ৳ ' + totalExpense.toLocaleString('bn-BD');
+            document.getElementById('profit-net').innerText = '৳ ' + netProfit.toLocaleString('bn-BD');
+        }
+
         updateLiveClockAndCalendar();
         setInterval(updateLiveClockAndCalendar, 1000);
     </script>
