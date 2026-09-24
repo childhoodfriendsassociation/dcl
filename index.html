@@ -866,7 +866,7 @@
         // --- GOOGLE SHEET SYNCING LOGIC ---
 
         async function saveToSheet(sheetName, rowData) {
-            if (SCRIPT_URL === "https://script.google.com/macros/s/AKfycbw6Ohij_Ztbj_FI9g9M24AeGJN7hprQd9ENsHsrKwZqBIeSoVF0Jrk6iqnWa8OfTykY8Q/exec") {
+            if (SCRIPT_URL === https://script.google.com/macros/s/AKfycbw6Ohij_Ztbj_FI9g9M24AeGJN7hprQd9ENsHsrKwZqBIeSoVF0Jrk6iqnWa8OfTykY8Q/exec) {
                 alert("অনুগ্রহ করে অ্যাপসে আপনার Google Apps Script URL সেট করুন।");
                 return false;
             }
@@ -889,7 +889,7 @@
         }
 
         async function fetchAllDataFromSheet() {
-            if (SCRIPT_URL === "https://script.google.com/macros/s/AKfycbw6Ohij_Ztbj_FI9g9M24AeGJN7hprQd9ENsHsrKwZqBIeSoVF0Jrk6iqnWa8OfTykY8Q/exec") return;
+            if (SCRIPT_URL === https://script.google.com/macros/s/AKfycbw6Ohij_Ztbj_FI9g9M24AeGJN7hprQd9ENsHsrKwZqBIeSoVF0Jrk6iqnWa8OfTykY8Q/exec) return;
             updateSyncStatus('loading');
             try {
                 const res = await fetch(SCRIPT_URL);
