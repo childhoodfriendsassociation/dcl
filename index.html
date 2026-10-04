@@ -148,7 +148,7 @@
             margin-bottom: 15px;
         }
 
-        /* --- লগইন টেবিলের নিচের ডেন্টাল কোট স্টাইল --- */
+        /* --- ডেন্টাল কোট স্টাইল --- */
         .quote-box {
             background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
             border: 1px dashed #38bdf8;
@@ -156,6 +156,7 @@
             padding: 16px 20px;
             text-align: center;
             box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            margin-bottom: 12px;
             transition: all 0.3s ease;
         }
 
@@ -176,6 +177,58 @@
             font-weight: 600;
             line-height: 1.5;
             font-style: italic;
+        }
+
+        /* --- ক্ষুদ্র ও কম দৃশ্যমান আইটি সাপোর্ট স্টাইল --- */
+        .it-support-mini {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .it-support-mini summary {
+            cursor: pointer;
+            color: #64748b;
+            font-weight: 600;
+            list-style: none;
+            user-select: none;
+        }
+
+        .it-support-mini summary:hover {
+            color: #0f172a;
+        }
+
+        .it-support-content {
+            margin-top: 8px;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .it-input {
+            flex: 1;
+            padding: 5px 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-size: 12px;
+            outline: none;
+        }
+
+        .btn-it-mini {
+            background: #475569;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .btn-it-mini:hover {
+            background: #334155;
         }
 
         .form-group { margin-bottom: 16px; }
@@ -429,9 +482,10 @@
         <!-- ০. সদস্য লগইন পেজ -->
         <div id="login-page" class="view-panel active">
             <div class="login-grid">
+                <!-- পরিচালকদের লগইন কার্ড -->
                 <div class="login-card">
                     <h3 style="text-align: center; margin-bottom: 16px; color: #0f172a; font-size: 17px;">🦷 পরিচালকবৃন্দ লগইন করুন 🦷</h3>
-                    <form onsubmit="handleLogin(event)">
+                    <form onsubmit="handleLogin(event, 'director')">
                         <div class="form-group">
                             <label for="member-select">পরিচালকের নাম:</label>
                             <select id="member-select" class="form-control" required>
@@ -439,7 +493,6 @@
                                 <option value="Bayzid (Founder & CEO)">বায়েজিদ (প্রতিষ্ঠাতা ও সিইও)</option>
                                 <option value="Kawser (Founder)">কাওসার (প্রতিষ্ঠাতা)</option>
                                 <option value="Ramim (Founder)">রামিম (প্রতিষ্ঠাতা)</option>
-                                <option value="Abdul Awal (IT Manager)">আবদুল আউয়াল (আইটি ম্যানেজার)</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -450,11 +503,20 @@
                     </form>
                 </div>
 
-                <!-- লগইন টেবিলের নিচের ডেন্টাল কোট বক্স -->
+                <!-- কোট বক্স -->
                 <div class="quote-box">
                     <i class="fa-solid fa-quote-left"></i>
                     <p class="quote-text" id="daily-quote-text">"আপনার সুন্দর হাসি এবং নিখুঁত দাঁতই আমাদের সফলতার সবচেয়ে বড় প্রমাণ।"</p>
                 </div>
+
+                <!-- অত্যন্ত ক্ষুদ্র ও কম নজরে আসার মতো আইটি সাপোর্ট ড্রপডাউন -->
+                <details class="it-support-mini">
+                    <summary><i class="fa-solid fa-laptop-code"></i> IT Support</summary>
+                    <form onsubmit="handleLogin(event, 'it')" class="it-support-content">
+                        <input type="password" id="it-pin-input" class="it-input" placeholder="আইটি পিন" required>
+                        <button type="submit" class="btn-it-mini"><i class="fa-solid fa-right-to-bracket"></i> লগইন</button>
+                    </form>
+                </details>
             </div>
         </div>
 
@@ -597,10 +659,10 @@
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw6Ohij_Ztbj_FI9g9M24AeGJN7hprQd9ENsHsrKwZqBIeSoVF0Jrk6iqnWa8OfTykY8Q/exec";
 
         const userCredentials = {
-            "Bayzid (Founder & CEO)": "100123",
-            "Kawser (Founder)": "100234",
-            "Ramim (Founder)": "100345",
-            "Abdul Awal (IT Manager)": "100456"
+            "Bayzid (Founder & CEO)": "Bz1999",
+            "Kawser (Founder)": "Ksr2026",
+            "Ramim (Founder)": "Rm2026",
+            "Abdul Awal (IT Manager)": "2925"
         };
 
         let loggedInUser = null;
@@ -616,7 +678,7 @@
             "Canada": "CA"
         };
 
-        // --- ডেন্টাল ও স্মাইল সম্পর্কিত কোট কালেকশন (ইংরেজি এবং বাংলা মিশ্রিত) ---
+        // --- ডেন্টাল ও স্মাইল সম্পর্কিত কোট কালেকশন ---
         const dentalQuotes = [
             "আপনার সুন্দর হাসি এবং নিখুঁত দাঁতই আমাদের সফলতার সবচেয়ে বড় প্রমাণ।",
             "প্রতিটি মুখমণ্ডলের সৌন্দর্য লুকিয়ে থাকে তার সুন্দর হাসিতে, আর সুস্থ দাঁত সেই হাসിയെ ফুটিয়ে তোলে।",
@@ -629,7 +691,6 @@
             "A warm smile is the universal language of kindness and good dental health."
         ];
 
-        // ইংরেজি কোট থাকলে সেটিকে গুগল ট্রান্সলেট API-এর মাধ্যমে স্বয়ংক্রিয়ভাবে বাংলায় রূপান্তর করার ফাংশন
         async function loadRandomQuote() {
             const randomIndex = Math.floor(Math.random() * dentalQuotes.length);
             let selectedQuote = dentalQuotes[randomIndex];
@@ -637,7 +698,6 @@
             const quoteElement = document.getElementById('daily-quote-text');
             quoteElement.innerText = "কোট লোড হচ্ছে...";
 
-            // যদি কোটটি ইংরেজি হয়, তবে অটো-বাংলা ট্রান্সলেট করবে
             if (/^[A-Za-z0-9\s.,'"'-]+$/.test(selectedQuote)) {
                 try {
                     const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=bn&dt=t&q=${encodeURIComponent(selectedQuote)}`);
@@ -646,28 +706,20 @@
                         quoteElement.innerText = `"${data[0][0][0]}"`;
                         return;
                     }
-                } catch (e) {
-                    // ট্রান্সলেটে সমস্যা হলে মূল টেক্সট দেখাবে
-                }
+                } catch (e) {}
             }
             quoteElement.innerText = selectedQuote.startsWith('"') ? selectedQuote : `"${selectedQuote}"`;
         }
 
-        // --- লাইভ উইজেট ও ঘড়ি ---
         function updateLiveWidgets() {
             const now = new Date();
-            
-            // ১. লাইভ সময় (বাংলা ডিজিটে)
             document.getElementById('top-live-time').innerText = now.toLocaleTimeString('bn-BD');
 
-            // ২. লাইভ বার ও তারিখ (ফরম্যাট: রবিবার, ৪ অক্টোবর ২০২৬)
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             let formattedDate = now.toLocaleDateString('bn-BD', options);
-            
             document.getElementById('top-live-calendar').innerText = formattedDate;
         }
 
-        // --- আইপি ভিত্তিক লাইভ লোকেশন এবং আবহাওয়া ---
         async function initDeviceLocationAndWeather() {
             try {
                 const res = await fetch('https://ipapi.co/json/');
@@ -691,19 +743,28 @@
             }
         }
 
-        function handleLogin(e) {
+        function handleLogin(e, type) {
             e.preventDefault();
-            const memberName = document.getElementById('member-select').value;
-            const pin = document.getElementById('pin-input').value;
+            let memberName = "";
+            let pin = "";
 
-            if (!memberName) {
-                alert("অনুগ্রহ করে পরিচালক নির্বাচন করুন!");
-                return;
+            if (type === 'director') {
+                memberName = document.getElementById('member-select').value;
+                pin = document.getElementById('pin-input').value;
+
+                if (!memberName) {
+                    alert("অনুগ্রহ করে পরিচালক নির্বাচন করুন!");
+                    return;
+                }
+            } else if (type === 'it') {
+                memberName = "Abdul Awal (IT Manager)";
+                pin = document.getElementById('it-pin-input').value;
             }
 
             if (userCredentials[memberName] === pin) {
                 loggedInUser = memberName;
                 document.getElementById('pin-input').value = '';
+                document.getElementById('it-pin-input').value = '';
                 openPage('home-dashboard');
                 fetchAllDataFromSheet();
             } else {
@@ -714,7 +775,7 @@
         function handleLogout() {
             loggedInUser = null;
             openPage('login-page');
-            loadRandomQuote(); // লগআউট করে লগইন পেজে ফিরলেও নতুন কোট ও ট্রান্সলেশন দেখাবে
+            loadRandomQuote();
         }
 
         function openPage(pageId) {
@@ -813,7 +874,7 @@
 
         function renderLedgerTable(rows) {
             const tbody = document.getElementById('ledger-table-body');
-            tbody.innerHTML = '';
+               tbody.innerHTML = '';
             rows.forEach(r => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `<td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="text-right">${r[3]}</td><td class="text-center"><span class="user-tag"><i class="fa-regular fa-user"></i> ${r[4]}</span></td>`;
@@ -837,11 +898,11 @@
             e.preventDefault();
             const date = formatDate(document.getElementById('ledger-date').value);
             const clinic = document.getElementById('ledger-clinic').value;
-            const service = document.getElementById('ledger-service-service').value || document.getElementById('ledger-service').value;
+            const service = document.getElementById('ledger-service').value;
             const amount = parseFloat(document.getElementById('ledger-amount').value);
             const userTag = getCurrentUserShortName();
 
-            const rowData = [date, clinic, document.getElementById('ledger-service').value, amount, userTag];
+            const rowData = [date, clinic, service, amount, userTag];
             e.target.reset();
             
             await saveToSheet('Ledger', rowData);
