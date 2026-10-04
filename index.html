@@ -179,14 +179,16 @@
             font-style: italic;
         }
 
-        /* --- ক্ষুদ্র ও কম দৃশ্যমান আইটি সাপোর্ট স্টাইল --- */
+        /* --- ফুটারের ভেতরে থাকা ক্ষুদ্র আইটি সাপোর্ট স্টাইল --- */
         .it-support-mini {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 8px 12px;
-            font-size: 12px;
-            text-align: center;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 11px;
+            display: inline-block;
+            margin-top: 8px;
+            text-align: left;
         }
 
         .it-support-mini summary {
@@ -202,18 +204,18 @@
         }
 
         .it-support-content {
-            margin-top: 8px;
+            margin-top: 6px;
             display: flex;
             gap: 6px;
             align-items: center;
         }
 
         .it-input {
-            flex: 1;
-            padding: 5px 8px;
+            width: 100px;
+            padding: 3px 6px;
             border: 1px solid #cbd5e1;
             border-radius: 4px;
-            font-size: 12px;
+            font-size: 11px;
             outline: none;
         }
 
@@ -221,9 +223,9 @@
             background: #475569;
             color: white;
             border: none;
-            padding: 5px 10px;
+            padding: 3px 8px;
             border-radius: 4px;
-            font-size: 12px;
+            font-size: 11px;
             cursor: pointer;
             white-space: nowrap;
         }
@@ -508,15 +510,6 @@
                     <i class="fa-solid fa-quote-left"></i>
                     <p class="quote-text" id="daily-quote-text">"আপনার সুন্দর হাসি এবং নিখুঁত দাঁতই আমাদের সফলতার সবচেয়ে বড় প্রমাণ।"</p>
                 </div>
-
-                <!-- অত্যন্ত ক্ষুদ্র ও কম নজরে আসার মতো আইটি সাপোর্ট ড্রপডাউন -->
-                <details class="it-support-mini">
-                    <summary><i class="fa-solid fa-laptop-code"></i> IT Support</summary>
-                    <form onsubmit="handleLogin(event, 'it')" class="it-support-content">
-                        <input type="password" id="it-pin-input" class="it-input" placeholder="আইটি পিন" required>
-                        <button type="submit" class="btn-it-mini"><i class="fa-solid fa-right-to-bracket"></i> লগইন</button>
-                    </form>
-                </details>
             </div>
         </div>
 
@@ -652,7 +645,18 @@
 
     <footer>
         <div>ডেন্ট ক্রাফট ল্যাব — নতুন সার্কুলার রোড, বরিশাল সদর, বরিশাল | প্রিসিশন ডেন্টাল সলিউশন্স</div>
-        <div style="margin-top: 4px;">© 2026, ডেন্ট ক্রাফট ল্যাব | ডেভেলপার: আবদুল আউয়াল, দুবাই, সংযুক্ত আরব আমিরাত</div>
+        <div style="margin-top: 4px;">© 2026, ডেন্ট ক্রাফট ল্যাব</div>
+        
+        <!-- ফুটারের একদম নিচে অত্যন্ত ক্ষুদ্র ও গোপন IT Support -->
+        <div>
+            <details class="it-support-mini">
+                <summary><i class="fa-solid fa-laptop-code"></i> IT Support</summary>
+                <form onsubmit="handleLogin(event, 'it')" class="it-support-content">
+                    <input type="password" id="it-pin-input" class="it-input" placeholder="আইটি পিন" required>
+                    <button type="submit" class="btn-it-mini"><i class="fa-solid fa-right-to-bracket"></i> লগইন</button>
+                </form>
+            </details>
+        </div>
     </footer>
 
     <script>
@@ -764,7 +768,8 @@
             if (userCredentials[memberName] === pin) {
                 loggedInUser = memberName;
                 document.getElementById('pin-input').value = '';
-                document.getElementById('it-pin-input').value = '';
+                const itPinField = document.getElementById('it-pin-input');
+                if(itPinField) itPinField.value = '';
                 openPage('home-dashboard');
                 fetchAllDataFromSheet();
             } else {
@@ -874,7 +879,7 @@
 
         function renderLedgerTable(rows) {
             const tbody = document.getElementById('ledger-table-body');
-               tbody.innerHTML = '';
+            tbody.innerHTML = '';
             rows.forEach(r => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `<td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="text-right">${r[3]}</td><td class="text-center"><span class="user-tag"><i class="fa-regular fa-user"></i> ${r[4]}</span></td>`;
