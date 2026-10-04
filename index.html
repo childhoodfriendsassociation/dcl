@@ -31,11 +31,16 @@
             color: #ffffff;
             padding: 14px 20px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            flex-wrap: wrap;
-            gap: 15px;
+            gap: 12px;
+        }
+
+        .brand-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
         }
 
         .brand-title {
@@ -50,13 +55,51 @@
             font-style: italic;
         }
 
+        /* --- হেডার রাইট সাইড কন্টেইনার (লগআউট ও ক্লাউড রেডি ব্যাজ একসাথে) --- */
+        .header-right-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 15px;
+        }
+
+        /* --- টপ হেডার ছোট লগআউট বাটন --- */
+        .top-logout-btn {
+            display: none;
+            background-color: #e11d48;
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            align-items: center;
+            gap: 4px;
+        }
+        .top-logout-btn:hover { background-color: #be123c; }
+
+        /* --- ক্লাউড রেডি ব্যাজ --- */
+        .sync-indicator {
+            font-size: 12px;
+            color: #38bdf8;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            white-space: nowrap;
+        }
+
         /* --- মোবাইল ও পিসির জন্য অপ্টিমাইজড বড় উইজেট বিন্যাস --- */
         .top-bar-widgets {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 8px 12px;
             width: 100%;
-            max-width: 360px;
         }
 
         .top-widget-box {
@@ -80,8 +123,7 @@
 
         @media (min-width: 768px) {
             .top-bar-widgets {
-                width: auto;
-                max-width: none;
+                grid-template-columns: repeat(4, 1fr);
             }
         }
 
@@ -95,19 +137,21 @@
 
         .nav-bar {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
             margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
         }
 
         .nav-actions {
             display: flex;
             gap: 10px;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .back-btn, .logout-btn {
+        .back-btn {
             display: none;
             color: white;
             border: none;
@@ -116,13 +160,89 @@
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
+            background-color: #0284c7;
         }
-
-        .back-btn { background-color: #0284c7; }
         .back-btn:hover { background-color: #0369a1; }
 
-        .logout-btn { background-color: #e11d48; }
-        .logout-btn:hover { background-color: #be123c; }
+        /* --- ইউজারের জন্য ড্যাশবোর্ড রঙিন ওয়েলকাম টেক্সট --- */
+        .user-welcome-msg {
+            display: none;
+            font-size: 15px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0284c7, #9333ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            text-align: center;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .page-title-container {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        /* --- লাভ-ক্ষতির মুভিং স্লাইড (Marquee Banner) --- */
+        .profit-ticker-card {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .ticker-label {
+            background: #0284c7;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .ticker-content {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .ticker-text {
+            display: inline-block;
+            animation: tickerMove 25s linear infinite;
+            color: #0f172a;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .ticker-text span {
+            margin-right: 40px;
+        }
+
+        @keyframes tickerMove {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* --- বিসমিল্লাহির রহমানির রাহীম ডিজাইন (শুধুমাত্র প্রথম পেইজের জন্য) --- */
+        .bismillah-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: #15803d;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
 
         .page-title {
             font-size: 18px;
@@ -385,16 +505,14 @@
             margin-top: auto;
         }
 
-        .sync-indicator {
-            font-size: 12px;
-            color: #0284c7;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
+        .top-header-wrapper {
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         @media print {
-            header, .nav-bar, footer, .btn-print, .entry-form-card { 
+            header, .nav-bar, footer, .btn-print, .entry-form-card, .profit-ticker-card { 
                 display: none !important; 
             }
 
@@ -427,36 +545,43 @@
 </head>
 <body>
 
-    <header>
-        <div>
-            <div class="brand-title"><i class="fa-solid fa-tooth"></i> ডেন্ট ক্রাফট ল্যাব</div>
-            <div class="brand-slogan">"প্রিসিশন ডেন্টাল সলিউশন্স ও ম্যানেজমেন্ট"</div>
-        </div>
+    <div class="top-header-wrapper">
+        <header>
+            <div class="brand-container">
+                <div>
+                    <div class="brand-title"><i class="fa-solid fa-tooth"></i> ডেন্ট ক্রাফট ল্যাব</div>
+                    <div class="brand-slogan">"প্রিসিশন ডেন্টাল সলিউশন্স ও ম্যানেজমেন্ট"</div>
+                </div>
+                <!-- ডানপাশে ছোট লগআউট বাটন ও ক্লাউড রেডি ব্যাজ -->
+                <div class="header-right-actions">
+                    <button class="top-logout-btn" id="logout-button" onclick="handleLogout()">
+                        <i class="fa-solid fa-right-from-bracket"></i> লগআউট
+                    </button>
+                    <span class="sync-indicator" id="sync-status"><i class="fa-solid fa-cloud"></i> ক্লাউড রেডি</span>
+                </div>
+            </div>
 
-        <!-- মোবাইল ও পিসির জন্য অপ্টিমাইজড ২ লাইনে ৪টি বড় উইজেট -->
-        <div class="top-bar-widgets">
-            <!-- লাইন ১, কলাম ১: লোকেশন -->
-            <div class="top-widget-box" title="বর্তমান অবস্থান">
-                <i class="fa-solid fa-location-dot"></i>
-                <span id="top-live-location">বরিশাল, BD</span>
+            <!-- মোবাইল ও পিসির জন্য অপ্টিমাইজড ৪টি উইজেট -->
+            <div class="top-bar-widgets">
+                <div class="top-widget-box" title="বর্তমান অবস্থান">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span id="top-live-location">বরিশাল, BD</span>
+                </div>
+                <div class="top-widget-box" title="লাইভ সময়">
+                    <i class="fa-regular fa-clock"></i>
+                    <span id="top-live-time">--:--:--</span>
+                </div>
+                <div class="top-widget-box" title="আজকের দিন ও তারিখ">
+                    <i class="fa-regular fa-calendar-days"></i>
+                    <span id="top-live-calendar">--</span>
+                </div>
+                <div class="top-widget-box" title="লাইভ আবহাওয়া">
+                    <i class="fa-solid fa-cloud-sun"></i>
+                    <span id="top-live-weather">২৮°C</span>
+                </div>
             </div>
-            <!-- লাইন ১, কলাম ২: সময় -->
-            <div class="top-widget-box" title="লাইভ সময়">
-                <i class="fa-regular fa-clock"></i>
-                <span id="top-live-time">--:--:--</span>
-            </div>
-            <!-- লাইন ২, কলাম ১: ক্যালেন্ডার বার ও তারিখ -->
-            <div class="top-widget-box" title="আজকের দিন ও তারিখ">
-                <i class="fa-regular fa-calendar-days"></i>
-                <span id="top-live-calendar">--</span>
-            </div>
-            <!-- লাইন ২, কলাম ২: আবহাওয়া -->
-            <div class="top-widget-box" title="লাইভ আবহাওয়া">
-                <i class="fa-solid fa-cloud-sun"></i>
-                <span id="top-live-weather">২৮°C</span>
-            </div>
-        </div>
-    </header>
+        </header>
+    </div>
 
     <div class="container">
 
@@ -466,25 +591,39 @@
             <p>নতুন সার্কুলার রোড, বরিশাল সদর, বরিশাল | ফোন: +880 1700-000000</p>
         </div>
 
-        <div class="nav-bar">
-            <div>
-                <h2 class="page-title" id="current-page-title">📯 স্বাগতম</h2>
-                <span class="sync-indicator" id="sync-status"><i class="fa-solid fa-cloud"></i> ক্লাউড রেডি</span>
+        <!-- লাভ/ক্ষতির মুভিং স্লাইড (টিকার ব্যানার) -->
+        <div class="profit-ticker-card">
+            <div class="ticker-label"><i class="fa-solid fa-chart-line"></i> ল্যাব স্ট্যাটাস</div>
+            <div class="ticker-content">
+                <div class="ticker-text" id="global-ticker-text">
+                    <span>মোট আয়: <strong id="ticker-rev">৳ ০</strong></span> • 
+                    <span>মোট খরচ: <strong id="ticker-exp" style="color: #e11d48;">৳ ০</strong></span> • 
+                    <span>নিট মুনাফা: <strong id="ticker-net" style="color: #16a34a;">৳ ০</strong></span> • 
+                    <span>ডেন্ট ক্রাফট ল্যাব ম্যানেজমেন্ট সিস্টেমে আপনাকে স্বাগতম!</span>
+                </div>
             </div>
+        </div>
+
+        <div class="nav-bar">
+            <!-- পেজ টাইটেল ও বিসমিল্লাহ অংশ -->
+            <div style="width: 100%; display: block;" class="page-title-container" id="page-title-box">
+                <div class="bismillah-text" id="bismillah-line">বিসমিল্লাহির রহমানির রাহীম</div>
+                <h2 class="page-title" id="current-page-title"></h2>
+            </div>
+
+            <!-- ড্যাশবোর্ড রঙিন ওয়েলকাম মেসেজ -->
+            <div class="user-welcome-msg" id="user-welcome-span">স্বাগতম, বায়জিদ — ল্যাব সিস্টেমে আপনাকে স্বাগতম</div>
+
             <div class="nav-actions">
                 <button class="back-btn" id="back-button" onclick="openPage('home-dashboard')">
                     <i class="fa-solid fa-arrow-left"></i> ড্যাশবোর্ডে ফিরে যান
                 </button>
-                <button class="logout-btn" id="logout-button" onclick="handleLogout()">
-                    <i class="fa-solid fa-right-from-bracket"></i> লগআউট
-                </button>
-            </div>
+             </div>
         </div>
 
-        <!-- ০. সদস্য লগইন পেজ -->
+        <!-- ০. সদস্য লগইন পেইজ (প্রথম পেইজ) -->
         <div id="login-page" class="view-panel active">
             <div class="login-grid">
-                <!-- পরিচালকদের লগইন কার্ড -->
                 <div class="login-card">
                     <h3 style="text-align: center; margin-bottom: 16px; color: #0f172a; font-size: 17px;">🦷 পরিচালকবৃন্দ লগইন করুন 🦷</h3>
                     <form onsubmit="handleLogin(event, 'director')">
@@ -492,7 +631,7 @@
                             <label for="member-select">পরিচালকের নাম:</label>
                             <select id="member-select" class="form-control" required>
                                 <option value="">এখানে সিলেক্ট করুন</option>
-                                <option value="Bayzid (Founder & CEO)">বায়েজিদ (প্রতিষ্ঠাতা ও সিইও)</option>
+                                <option value="Bayzid (Founder & CEO)">বায়জিদ (প্রতিষ্ঠাতা ও সিইও)</option>
                                 <option value="Kawser (Founder)">কাওসার (প্রতিষ্ঠাতা)</option>
                                 <option value="Ramim (Founder)">রামিম (প্রতিষ্ঠাতা)</option>
                             </select>
@@ -505,7 +644,6 @@
                     </form>
                 </div>
 
-                <!-- কোট বক্স -->
                 <div class="quote-box">
                     <i class="fa-solid fa-quote-left"></i>
                     <p class="quote-text" id="daily-quote-text">"আপনার সুন্দর হাসি এবং নিখুঁত দাঁতই আমাদের সফলতার সবচেয়ে বড় প্রমাণ।"</p>
@@ -647,7 +785,6 @@
         <div>ডেন্ট ক্রাফট ল্যাব — নতুন সার্কুলার রোড, বরিশাল সদর, বরিশাল | প্রিসিশন ডেন্টাল সলিউশন্স</div>
         <div style="margin-top: 4px;">© 2026, ডেন্ট ক্রাফট ল্যাব</div>
         
-        <!-- ফুটারের একদম নিচে অত্যন্ত ক্ষুদ্র ও গোপন IT Support -->
         <div>
             <details class="it-support-mini">
                 <summary><i class="fa-solid fa-laptop-code"></i> IT Support</summary>
@@ -671,7 +808,6 @@
 
         let loggedInUser = null;
 
-        // দেশের কোড ম্যাপিং (Country Code Shortcuts)
         const countryShortcuts = {
             "Bangladesh": "BD",
             "United Arab Emirates": "UAE",
@@ -682,7 +818,6 @@
             "Canada": "CA"
         };
 
-        // --- ডেন্টাল ও স্মাইল সম্পর্কিত কোট কালেকশন ---
         const dentalQuotes = [
             "আপনার সুন্দর হাসি এবং নিখুঁত দাঁতই আমাদের সফলতার সবচেয়ে বড় প্রমাণ।",
             "প্রতিটি মুখমণ্ডলের সৌন্দর্য লুকিয়ে থাকে তার সুন্দর হাসিতে, আর সুস্থ দাঁত সেই হাসിയെ ফুটিয়ে তোলে।",
@@ -770,6 +905,11 @@
                 document.getElementById('pin-input').value = '';
                 const itPinField = document.getElementById('it-pin-input');
                 if(itPinField) itPinField.value = '';
+                
+                // ইউজারের নাম ডাইনামিকালি সেট করা
+                const shortName = getCurrentUserShortName();
+                document.getElementById('user-welcome-span').innerText = `জনাব, ${shortName} — ল্যাব সিস্টেমে আপনাকে স্বাগতম`;
+
                 openPage('home-dashboard');
                 fetchAllDataFromSheet();
             } else {
@@ -789,19 +929,28 @@
 
             const backBtn = document.getElementById('back-button');
             const logoutBtn = document.getElementById('logout-button');
+            const welcomeSpan = document.getElementById('user-welcome-span');
+            const bismillahLine = document.getElementById('bismillah-line');
             const pageTitle = document.getElementById('current-page-title');
 
             if (pageId === 'login-page') {
                 backBtn.style.display = 'none';
                 logoutBtn.style.display = 'none';
-                pageTitle.innerText = "সদস্য লগইন";
+                welcomeSpan.style.display = 'none'; 
+                if(bismillahLine) bismillahLine.style.display = 'block'; 
+                pageTitle.innerText = "পরিচালক লগইন পোর্টাল";
             } else if (pageId === 'home-dashboard') {
                 backBtn.style.display = 'none';
-                logoutBtn.style.display = 'inline-block';
-                pageTitle.innerText = "ড্যাশবোর্ড (Dashboard)";
+                logoutBtn.style.display = 'inline-flex';
+                welcomeSpan.style.display = 'block'; 
+                if(bismillahLine) bismillahLine.style.display = 'none'; 
+                pageTitle.innerText = "ড্যাশবোর্ড মেনু";
             } else {
                 backBtn.style.display = 'inline-block';
-                logoutBtn.style.display = 'inline-block';
+                logoutBtn.style.display = 'inline-flex';
+                welcomeSpan.style.display = 'block'; 
+                if(bismillahLine) bismillahLine.style.display = 'none'; 
+                
                 if (pageId === 'daily-ledger-page') pageTitle.innerText = "ডেইলি লেজার (ডেইলি আয়)";
                 else if (pageId === 'daily-expense-page') pageTitle.innerText = "ডেইলি এক্সপেন্স (দৈনিক খরচ)";
                 else if (pageId === 'profit-page') {
@@ -819,7 +968,7 @@
 
         function getCurrentUserShortName() {
             if(!loggedInUser) return "সিস্টেম";
-            if(loggedInUser.includes("Bayzid")) return "বায়েজিদ";
+            if(loggedInUser.includes("Bayzid")) return "বায়জিদ";
             if(loggedInUser.includes("Kawser")) return "কাওসার";
             if(loggedInUser.includes("Ramim")) return "রামিম";
             if(loggedInUser.includes("Abdul Awal")) return "আবদুল আউয়াল";
@@ -833,7 +982,7 @@
             } else if(status === 'loading') {
                 el.innerHTML = `<i class="fa-solid fa-cloud-arrow-down fa-bounce"></i> ডাটা সিঙ্ক হচ্ছে...`;
             } else {
-                el.innerHTML = `<i class="fa-solid fa-cloud"></i> ক্লাউড সিঙ্কড`;
+                el.innerHTML = `<i class="fa-solid fa-cloud"></i> ক্লাউড রেডি`;
             }
         }
 
@@ -920,7 +1069,7 @@
             const sector = document.getElementById('expense-sector').value;
             const payee = document.getElementById('expense-payee').value;
             const amount = parseFloat(document.getElementById('expense-amount').value);
-            const userTag = getCurrentUserShortName();
+            const userTag =getCurrentUserShortName();
 
             const rowData = [date, sector, payee, amount, userTag];
             e.target.reset();
@@ -937,7 +1086,11 @@
                     total += val;
                 }
             });
-            document.getElementById('ledger-total').innerText = '৳ ' + total.toLocaleString('bn-BD');
+            const formattedTotal = '৳ ' + total.toLocaleString('bn-BD');
+            document.getElementById('ledger-total').innerText = formattedTotal;
+            document.getElementById('ticker-rev').innerText = formattedTotal;
+            
+            updateTickerNetProfit();
             return total;
         }
 
@@ -949,8 +1102,28 @@
                     total += val;
                 }
             });
-            document.getElementById('expense-total').innerText = '৳ ' + total.toLocaleString('bn-BD');
+            const formattedTotal = '৳ ' + total.toLocaleString('bn-BD');
+            document.getElementById('expense-total').innerText = formattedTotal;
+            document.getElementById('ticker-exp').innerText = formattedTotal;
+            
+            updateTickerNetProfit();
             return total;
+        }
+
+        function updateTickerNetProfit() {
+            let income = 0;
+            document.querySelectorAll('#ledger-table-body tr').forEach(tr => {
+                if(tr.children[3]) income += parseFloat(tr.children[3].innerText.replace(/,/g, '')) || 0;
+            });
+
+            let expense = 0;
+            document.querySelectorAll('#expense-table-body tr').forEach(tr => {
+                if(tr.children[3]) expense += parseFloat(tr.children[3].innerText.replace(/,/g, '')) || 0;
+            });
+
+            const net = income - expense;
+            const formattedNet = '৳ ' + net.toLocaleString('bn-BD');
+            document.getElementById('ticker-net').innerText = formattedNet;
         }
 
         function updateProfitLossPage() {
@@ -963,7 +1136,6 @@
             document.getElementById('profit-net').innerText = '৳ ' + netProfit.toLocaleString('bn-BD');
         }
 
-        // ইনিশিয়ালাইজেশন
         loadRandomQuote();
         updateLiveWidgets();
         initDeviceLocationAndWeather();
